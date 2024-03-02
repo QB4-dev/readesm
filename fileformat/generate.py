@@ -38,7 +38,7 @@ def writeIfDifferent(filename, newContent):
 		f = open(filename,'w')
 		f.write(newContent)
 		f.close()
-		print filename
+		print(filename)
 
 def lcfirst(a):
 	return a[0].lower() + a[1:]
@@ -75,7 +75,7 @@ for j in range(3):
 		if name in sizes:
 			continue
 		try:
-			print name
+			print(name)
 			size = 0
 			for elem in block.find('content'):
 				l = elem.get('length')
@@ -89,9 +89,9 @@ for j in range(3):
 		except StopIteration:
 			haveSizes = False
 			continue
-print sizes
+print(sizes)
 if not haveSizes:
-	print "Could not determine block sizes for " + ', '.join(block.get('name') if block.get('name') not in sizes else "" for block in tree.findall('DataType')) + ", abandoning"
+	print("Could not determine block sizes for " + ', '.join(block.get('name') if block.get('name') not in sizes else "" for block in tree.findall('DataType')) + ", abandoning")
 	exit()
 
 hasToString = set(['TimeReal', 'Timespan', 'RawData', 'LargeNumber'])
@@ -108,10 +108,10 @@ for block in tree.findall('CardBlock') + tree.findall('DataType') + tree.findall
 	headerDependencies = set(['"' + block.tag + '.h"'])
 	codeDependencies = set()
 	name = block.get('name')
-	print name
+	print(name)
 	if block.get('hasrefined'):
 		name = 'Raw' + name
-	
+
 	offsets = {'CardBlock' : 5, 'VuBlock' : 2, 'DataType' : 0}
 	offset = offsets[block.tag]
 	offsetextra = ''
@@ -121,7 +121,7 @@ for block in tree.findall('CardBlock') + tree.findall('DataType') + tree.findall
 		isLast = False
 		thisoutput = None
 		fullOffset = 'start + %(offset)i %(offsetextra)s' % vars()
-		
+
 		length = elem.get('length')
 		if length is not None:
 			length = int(length)
@@ -180,8 +180,8 @@ for block in tree.findall('CardBlock') + tree.findall('DataType') + tree.findall
 			output += thisoutput
 		elif type == 'QString':
 			output += '\nreport.tagValuePair(tr("%(ename)s"), %(ename)s);' % vars()
-		else:	
-			print ename, type
+		else:
+			print(ename, type)
 			output += '\nreport.writeBlock(%(ename)s, tr("%(ename)s"));' % vars()
 		elements += '\n' + type + ' ' + ename + ';'
 		initList += ',\n\t' + ename + '(' + builder + ')'
@@ -207,7 +207,7 @@ for block in tree.findall('CardBlock') + tree.findall('DataType') + tree.findall
 		if title.get('dynamic') == 'yes':
 			codeContent += title.text
 		else:
-			codeContent += 'tr("%s")' % title.text	
+			codeContent += 'tr("%s")' % title.text
 		codeContent += ';\n}\n\n'
 
 	if block.tag != 'DataType':
@@ -224,7 +224,7 @@ for block in tree.findall('CardBlock') + tree.findall('DataType') + tree.findall
 		headerContent += '\tQString toString() const;\n'
 		toString = toString.text
 		codeContent += 'QString %(name)s::toString() const{\n\treturn %(toString)s;\n}\n\n' % vars()
-		
+
 	headerContent += '\t' + 'virtual void printOn(Reporter& report) const;\n' + \
 		  '};\n\n'
 	codeContent += 'void ' + name + '::printOn(Reporter& report) const {' + output.replace('\n','\n\t')
