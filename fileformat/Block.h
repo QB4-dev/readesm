@@ -28,6 +28,7 @@ class Block {
 	Q_DECLARE_TR_FUNCTIONS(Block)
 	public:
 	Block(const DataPointer& filewalker);
+        virtual ~Block() {};
 
 	///Size of data used in the file
 	/** If the data element uses 3 bytes in the file, size() will return 3. */

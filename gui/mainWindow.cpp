@@ -3,20 +3,20 @@
 #include "../fileformat/EsmFile.h"
 #include "../fileformat/Reporter/HtmlReporter.h"
 
-#include <QtCore/QString>
-#include <QtCore/QStringBuilder>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QDesktopWidget>
-#include <QtGui/QFileDialog>
-#include <QtGui/QMenu>
-#include <QtGui/QMenuBar>
-#include <QtGui/QMessageBox>
-#include <QtGui/QPrinter>
-#include <QtGui/QPrintDialog>
-#include <QtWebKit/QWebFrame>
-#include <QtWebKit/QWebView>
-#include <QtCore/QDebug>
+#include <QString>
+#include <QStringBuilder>
+#include <QAction>
+#include <QApplication>
+#include <QDesktopWidget>
+#include <QFileDialog>
+#include <QMenu>
+#include <QMenuBar>
+#include <QMessageBox>
+#include <QPrinter>
+#include <QPrintDialog>
+#include <QWebFrame>
+#include <QWebView>
+#include <QDebug>
 
 mainWindow::mainWindow()
 {
@@ -102,7 +102,7 @@ void mainWindow::openFile()
 	QString fileName = QFileDialog::getOpenFileName(this,
 		tr("Open Tachograph File"),
 		QString(),
-		tr("Tachograph Files") + "(*.esm *.ddd *.tgd *.add)" + ";;" + tr("All files") + "(*)"
+		tr("Tachograph Files") + "(*.esm *.ddd *.DDD *.tgd *.add)" + ";;" + tr("All files") + "(*)"
 	);
 	if(fileName != "") openFile(fileName);
 }
@@ -177,4 +177,3 @@ void mainWindow::saveRaw()
 	}
 }
 
-#include "mainWindow.moc"

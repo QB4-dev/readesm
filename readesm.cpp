@@ -28,13 +28,13 @@ Start the readesm executable from the command line or from the menu
 #include "gui/mainWindow.h"
 #include "OptionParser.h"
 
-#include <QtCore/QByteArray>
-#include <QtCore/QFile>
-#include <QtCore/QLocale>
-#include <QtCore/QString>
-#include <QtCore/QTextStream>
-#include <QtCore/QTranslator>
-#include <QtGui/QApplication>
+#include <QByteArray>
+#include <QFile>
+#include <QLocale>
+#include <QString>
+#include <QTextStream>
+#include <QTranslator>
+#include <QApplication>
 
 int main(int argc, char** argv)
 {

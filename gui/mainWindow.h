@@ -1,9 +1,9 @@
 #ifndef mainWindow_H
 #define mainWindow_H
 
-#include <QtGui/QMainWindow>
-#include <QtCore/QSharedPointer>
-#include <QtCore/QByteArray>
+#include <QMainWindow>
+#include <QSharedPointer>
+#include <QByteArray>
 
 class EsmFile;
 class QString;

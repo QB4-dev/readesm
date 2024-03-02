@@ -1,5 +1,13 @@
+cmake_minimum_required(VERSION 3.10.0)
 project(readesm)
-cmake_minimum_required(VERSION 2.8)
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 if(WIN32)
 	#set(CMAKE_FIND_LIBRARY_SUFFIXES .lib .a ${CMAKE_FIND_LIBRARY_SUFFIXES})
@@ -20,7 +28,7 @@ endif()
 
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
-find_package(Qt4 COMPONENTS QtGui QtWebKit REQUIRED)
+find_package(Qt5 REQUIRED COMPONENTS Core Widgets WebKit WebKitWidgets LinguistTools PrintSupport)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
@@ -55,7 +63,7 @@ configure_file(${CMAKE_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/config.h)
 
 #*** translation ***
 file (GLOB TRANSLATIONS_FILES "ressources/translations/*.ts")
-qt4_add_translation(QM_FILES ${readesm_SRCS} ${TRANSLATIONS_FILES})
+qt5_add_translation(QM_FILES ${readesm_SRCS} ${TRANSLATIONS_FILES})
 add_custom_target(translations_target DEPENDS ${QM_FILES})
 
 #*** Actual part needed to build everything ***
@@ -66,15 +74,18 @@ file(GLOB fileformat_CPP "fileformat/*.cpp" "fileformat/*/*.cpp")
 file(GLOB gui_H "gui/*.h")
 file(GLOB fileformat_H "fileformat/*.h" "fileformat/*/*.h")
 file(GLOB main "*.cpp" "*.h")
-set(readesm_SRCS ${gui_CPP} ${fileformat_CPP} ${gui_H} ${fileformat_H} ${main})
+set(readesm_SRCS ${gui_CPP} ${fileformat_CPP} ${gui_H} ${fileformat_H} ${main} ${autogen})
 set(readesm_RCCS readesm.qrc)
 
-qt4_add_resources(readesm_RCC_SRCS ${readesm_RCCS})
-
-qt4_automoc(${readesm_SRCS})
+qt5_add_resources(readesm_RCC_SRCS ${readesm_RCCS})
+#qt5_generate_moc(${readesm_SRCS})
 
 add_executable(readesm ${GUI_TYPE} ${readesm_SRCS} ${readesm_RCC_SRCS} ${QM_FILES} readesm.rc)
+
 target_link_libraries(readesm ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTWEBKIT_LIBRARY} ${LIBS})
+target_link_libraries(readesm Qt5::Widgets)
+target_link_libraries(readesm Qt5::PrintSupport)
+target_link_libraries(readesm Qt5::WebKitWidgets)
 
 
 #*** .desktop file, icon and mime type ***
