@@ -1,5 +1,7 @@
 #include "VuBlock.h"
 
+#include "../DataTypes/RawData.h"
+
 RawData VuBlock::signedBytes() const {
 	return RawData(start + 2, size() - 128 - 2);
 }

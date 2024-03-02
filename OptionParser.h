@@ -1,10 +1,11 @@
 #ifndef OPTIONPARSER_H
-#define OPTIONPARSER_H OPTIONPARSER_H
+#define OPTIONPARSER_H
 
-#include <QtCore/QCoreApplication>
-#include <QtCore/QMap>
-#include <QtCore/QStringList>
-#include <QtCore/QString>
+#include <QCoreApplication>
+#include <QMap>
+#include <QStringList>
+
+class QString;
 
 class OptionParser {
 	Q_DECLARE_TR_FUNCTIONS(OptionParser)
@@ -19,11 +20,11 @@ protected:
 	QMap<QString, QString> options;
 	QMap<QString, QString> optionAliases;
 public:
-	OptionParser(bool withQt = true);
+	explicit OptionParser(bool withQt = true);
 	void addOption(const QString& longName, const QString& shortName, const QString& description);
 	void addFlag(const QString& longName, const QString& shortName, const QString& description);
 	bool parseArgs(int argc, char* argv[]);
-	QString get(const QString& argument, const QString& elsevalue = "") const;
+	QString get(const QString& argument, const QString& elsevalue = QString()) const;
 	bool checkFlag(const QString& argument) const;
 	QString getArgument(int j) const;
 	int argumentCount() const;

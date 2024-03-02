@@ -1,8 +1,8 @@
-readESM - digital tachograph file reader
+ReadESM - digital tachograph file reader
 
 This program takes an ESM file, as downloaded from a digital tachograph or a
 driver card, a compulsory equipment for trucks heavier than 3.5 tons within the
-European Union. It converts said files into human-readable form, either html or
+European Union. It converts said files into human-readable form, either HTML or
 simple plaintext.
 
 See the help.html file in the homepage folder for help.

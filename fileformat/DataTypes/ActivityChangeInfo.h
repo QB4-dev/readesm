@@ -1,5 +1,5 @@
 #ifndef ACTIVITYCHANGEINFO_H
-#define ACTIVITYCHANGEINFO_H ACTIVITYCHANGEINFO_H
+#define ACTIVITYCHANGEINFO_H
 
 #include "DataType.h"
 
@@ -22,7 +22,7 @@ public:
 
 	static const int staticSize = 2;
 
-	ActivityChangeInfo(const DataPointer& start);
+	explicit ActivityChangeInfo(const DataPointer& start);
 	void setDuration(int newDuration, bool newIsSlotState);
 	float heightHint() const;
 
@@ -36,6 +36,5 @@ public:
 	bool isDefaultValue() const;
 	QString title() const;
 };
-
 
 #endif

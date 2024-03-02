@@ -2,6 +2,8 @@
 
 #include "config.h"
 
+#include <QString>
+
 Block::Block(const DataPointer& filewalker) :
 	start(filewalker)
 {
@@ -13,11 +15,9 @@ Reporter& operator<<(Reporter& report, const Block& b) {
 }
 
 QString Block::title() const {
-	return "";
+	return QString();
 }
 
 QString Block::toString() const {
-	return "";
+	return QString();
 }
-
-

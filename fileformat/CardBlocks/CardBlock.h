@@ -5,7 +5,7 @@
 
 class CardBlock : public TopLevelBlock {
 	public:
-	CardBlock(const DataPointer& filewalker);
+	explicit CardBlock(const DataPointer& filewalker);
 	int size() const;
 
 	///size of Data block (i.e. without signature)

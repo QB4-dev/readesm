@@ -19,15 +19,19 @@ ActivityChangeInfo::ActivityChangeInfo(const DataPointer& start) : DataType(star
 	activity(a)
 {}
 
-void ActivityChangeInfo::setDuration(int newDuration, bool newIsSlotState){
+void ActivityChangeInfo::setDuration(int newDuration, bool newIsSlotState) {
 	duration = newDuration;
 	isSlotState = newIsSlotState;
-	if(a == 0 && duration < 15) activity = SHORTREST;
-	if(!isSlotState && (p != 0) && (c == 0)) activity = UNKNOWN;
+	if (a == 0 && duration < 15) {
+		activity = SHORTREST;
+	}
+	if (!isSlotState && (p != 0) && (c == 0)) {
+		activity = UNKNOWN;
+	}
 }
 
 float ActivityChangeInfo::heightHint() const {
-	switch(activity){
+	switch (activity) {
 		case REST: return 0.3;
 		case AVAILABLE: return 0.15;
 		case WORK: return 0.7;
@@ -39,7 +43,7 @@ float ActivityChangeInfo::heightHint() const {
 }
 
 QString ActivityChangeInfo::activityName() const {
-	switch(activity){
+	switch (activity) {
 		case REST: return tr("break/rest");
 		case AVAILABLE: return tr("availability");
 		case WORK: return tr("work");
@@ -50,7 +54,7 @@ QString ActivityChangeInfo::activityName() const {
 	return tr("unknown activity");
 }
 QString ActivityChangeInfo::color() const {
-	switch(activity){
+	switch (activity) {
 		case REST: return "red";
 		case AVAILABLE: return "black";
 		case WORK: return "yellow";
@@ -61,7 +65,7 @@ QString ActivityChangeInfo::color() const {
 	return "blue";
 }
 
-QString ActivityChangeInfo::formatClock(int time){
+QString ActivityChangeInfo::formatClock(int time) {
 	return QString("%1:%2")
 			.arg(time / 60, 1, 10, QChar('0'))
 			.arg(time % 60, 2, 10, QChar('0'));
@@ -75,12 +79,12 @@ QString ActivityChangeInfo::timespan() const {
 
 QString ActivityChangeInfo::extraString() const {
 	QString rv;
-	if(isSlotState){
-		rv += (p == 0 ? tr("Card inserted") : tr("Card not inserted or withdrawn"))+ ", ";
+	if (isSlotState) {
+		rv += (p == 0 ? tr("Card inserted") : tr("Card not inserted or withdrawn")) + ", ";
 		rv += (s == 0 ? tr("driver slot") : tr("co-driver slot")) + ", ";
 		rv += (c == 0 ? tr("single") : tr("crew"));
 	} else {
-		if(p == 0){
+		if (p == 0) {
 			rv += tr("Card inserted") + ", ";
 			rv += (s == 0 ? tr("driver slot") : tr("co-driver slot")) + ", ";
 			rv += (c == 0 ? tr("single") : tr("crew"));
@@ -106,19 +110,10 @@ int ActivityChangeInfo::size() const {
 }
 
 void ActivityChangeInfo::printOn(Reporter & o) const {
-	if (o.isSSS()) {
-		o.tagValuePair(tr("s"), s);
-		o.tagValuePair(tr("c"), c);
-		o.tagValuePair(tr("p"), p);
-		o.tagValuePair(tr("a"), a);
-		o.tagValuePair(tr("t"), t);
-		o.tagValuePair(tr("_d"), duration);
-	} else {
-		o.tagValuePair(tr("activity"), activityName());
-		o.tagValuePair(tr("time"), timespan());
-		o.tagValuePair(tr("slot status"), extraString());
-		o.tagValuePair(tr("Raw data"), QString("s=%1, c=%2, p=%3, a=%4, t=%5").arg(s).arg(c).arg(p).arg(a).arg(t));
-	}
+	o.tagValuePair(tr("activity"), activityName());
+	o.tagValuePair(tr("time"), timespan());
+	o.tagValuePair(tr("slot status"), extraString());
+	o.tagValuePair(tr("Raw data"), QString("s=%1, c=%2, p=%3, a=%4, t=%5").arg(s).arg(c).arg(p).arg(a).arg(t));
 }
 
 bool ActivityChangeInfo::isDefaultValue() const {

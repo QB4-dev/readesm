@@ -4,14 +4,13 @@
 #include "config.h"
 #ifdef HAVE_CRYPTO
 
-#include "../DataPointer.h"
-
-#include <QtCore/QString>
-
 #include <gmp.h>
 
+class DataPointer;
+class QString;
+
 ///wrap around mpz_t
-/** This can also be done by the c++-bindings of GMP, but they are not yet
+/** This can also be done by the C++ bindings of GMP, but they are not yet
  * finished and not available everywhere */
 class LargeNumber {
 	public:
@@ -27,12 +26,14 @@ class LargeNumber {
 #else
 
 #include "../DataPointer.h"
-#include <QtCore/QString>
+#include <QString>
 
 class LargeNumber {
 public:
-	LargeNumber(const DataPointer& start, int length){}
-	QString toString() const{ return "not implemented";}
+	LargeNumber(const DataPointer& start, int length) {}
+	QString toString() const {
+		return "not implemented";
+	}
 };
 
 #endif

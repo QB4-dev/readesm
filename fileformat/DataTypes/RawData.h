@@ -5,10 +5,11 @@
 #include "../DataPointer.h"
 
 class RawData : public DataType, public DataPointer {
+	Q_DECLARE_TR_FUNCTIONS(RawData)
 public:
 	int length_;
 	RawData(const DataPointer& start, int length);
-	RawData(const QByteArray& o);
+	explicit RawData(const QByteArray& data_);
 	QString toString() const;
 	QString className() const;
 

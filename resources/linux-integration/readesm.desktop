@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
 Type=Application
-Name=Readesm
+Name=ReadESM
 GenericName=Tachograph file viewer
 Comment=Viewer for Digital Tachograph files
 TryExec=readesm

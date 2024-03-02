@@ -6,9 +6,8 @@
 class CardSlots : public RawCardSlots {
 	Q_DECLARE_TR_FUNCTIONS(CardSlots)
 public:
-	CardSlots(const DataPointer& filewalker);
-	virtual void printOn(Reporter& o) const;
+	explicit CardSlots(const DataPointer& filewalker);
+	virtual void printOn(Reporter& report) const;
 };
-
 
 #endif

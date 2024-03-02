@@ -1,34 +1,37 @@
 /* Copyright 2009 Andreas Gölzer
 
- This file is part of readESM.
+ This file is part of ReadESM.
 
- readESM is free software: you can redistribute it and/or modify it under the
+ ReadESM is free software: you can redistribute it and/or modify it under the
  terms of the GNU General Public License as published by the Free Software
  Foundation, either version 3 of the License, or (at your option) any later
  version.
 
- readESM is distributed in the hope that it will be useful, but WITHOUT ANY
+ ReadESM is distributed in the hope that it will be useful, but WITHOUT ANY
  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License along with
- readESM.  If not, see <http://www.gnu.org/licenses/>. */
+ ReadESM.  If not, see <http://www.gnu.org/licenses/>. */
 
 #ifndef BLOCK_H
-#define BLOCK_H BLOCK_H
+#define BLOCK_H
 
-#include "Reporter/Reporter.h"
-#include "readTypes.h"
 #include "DataPointer.h"
+#include "Reporter/Reporter.h"
 
-#include <QtCore/QCoreApplication>
-#include <QtCore/QString>
+// Intentionally added here for auto-generated subclasses
+#include "readTypes.h"
+
+#include <QCoreApplication>
+
+class QString;
 
 class Block {
 	Q_DECLARE_TR_FUNCTIONS(Block)
 	public:
-	Block(const DataPointer& filewalker);
-        virtual ~Block() {};
+	explicit Block(const DataPointer& filewalker);
+    virtual ~Block() {}
 
 	///Size of data used in the file
 	/** If the data element uses 3 bytes in the file, size() will return 3. */
@@ -44,7 +47,7 @@ class Block {
 	///Possible short form of the block (empty if unset)
 	virtual QString toString() const;
 
-	friend Reporter& operator<<(Reporter& o, const Block& b);
+	friend Reporter& operator<<(Reporter& report, const Block& b);
 
 	protected:
 	virtual void printOn(Reporter& o) const = 0;

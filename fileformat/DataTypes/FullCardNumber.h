@@ -3,16 +3,15 @@
 
 #include "RawFullCardNumber.h"
 
-#include <QtCore/QMap>
+#include <QMap>
 
 class FullCardNumber : public RawFullCardNumber {
 	Q_DECLARE_TR_FUNCTIONS(FullCardNumber)
 public:
-	FullCardNumber(DataPointer filewalker);
+	explicit FullCardNumber(const DataPointer& filewalker);
 	QString toString() const;
 	virtual void printOn(Reporter& o) const;
 	static QMap<QString, QString>& mapCardNumberToName();
-
 };
 
 

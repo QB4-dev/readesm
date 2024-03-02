@@ -2,13 +2,13 @@
 #define DATATYPE_H
 
 #include "../Block.h"
-#include "../Reporter/Reporter.h"
-#include "../readTypes.h"
-#include "../DataPointer.h"
+
+class DataPointer;
+class Reporter;
 
 class DataType : public Block {
 public:
-	DataType(const DataPointer& nstart);
+	explicit DataType(const DataPointer& nstart);
 
 	friend Reporter& operator<<(Reporter& report, const DataType& d);
 	virtual void printOn(Reporter& report) const  = 0;

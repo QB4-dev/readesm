@@ -10,7 +10,7 @@
 class RsaPublicKey : public RawRsaPublicKey {
 	Q_DECLARE_TR_FUNCTIONS(RsaPublicKey)
 public:
-	RsaPublicKey(const DataPointer& start);
+	explicit RsaPublicKey(const DataPointer& start);
 	QByteArray perform(const RawData& input) const;
 };
 
@@ -19,10 +19,10 @@ public:
 #include "RawData.h"
 class RsaPublicKey : public DataType {
 public:
-	RsaPublicKey(const DataPointer& start) : DataType(start) {}
-	int size() const { return 128+8; }
+	explicit RsaPublicKey(const DataPointer& start) : DataType(start) {}
+	int size() const { return 128 + 8; }
 	QString className() const { return "RsaPublicKey"; }
-	void printOn(Reporter& report) const{
+	void printOn(Reporter& report) const {
 	}
 };
 

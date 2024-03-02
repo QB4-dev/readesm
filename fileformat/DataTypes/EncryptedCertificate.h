@@ -18,7 +18,7 @@ public:
 	bool attemptVerificationFrom(const PlainCertificate& certificate);
 	bool attemptVerificationFrom(const EncryptedCertificate& certificate);
 	bool checkSignature(const RawData& signedData, const RawData& signature) const;
-	EncryptedCertificate(const DataPointer& filewalker);
+	explicit EncryptedCertificate(const DataPointer& filewalker);
 	virtual void printOn(Reporter& report) const;
 	bool isVerified() const;
 };
@@ -27,7 +27,7 @@ public:
 
 class EncryptedCertificate : public RawEncryptedCertificate {
 public:
-	EncryptedCertificate(const DataPointer& filewalker) : RawEncryptedCertificate(filewalker){}
+	explicit EncryptedCertificate(const DataPointer& filewalker) : RawEncryptedCertificate(filewalker) {}
 };
 
 #endif

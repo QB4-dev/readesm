@@ -1,13 +1,7 @@
-cmake_minimum_required(VERSION 3.10.0)
-project(readesm)
+cmake_minimum_required(VERSION 2.8.11)
+project(ReadESM)
 
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-set(CMAKE_AUTOUIC ON)
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
+option(WITH_L10N "Build the translation files" OFF)
 
 if(WIN32)
 	#set(CMAKE_FIND_LIBRARY_SUFFIXES .lib .a ${CMAKE_FIND_LIBRARY_SUFFIXES})
@@ -18,9 +12,9 @@ if(MAC)
 	set(GUI_TYPE MACOSX_BUNDLE)
 endif()
 
-set(CMAKE_CXX_FLAGS "-Wall" )
+set(CMAKE_CXX_FLAGS "-Wall")
 set(CMAKE_CXX_FLAGS_RELEASE "-O2")
-set(CMAKE_CXX_FLAGS_DEBUG "-Werror")
+set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g3 -ggdb3")
 
 if(NOT CMAKE_BUILD_TYPE)
 	set(CMAKE_BUILD_TYPE release)
@@ -28,7 +22,17 @@ endif()
 
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
-find_package(Qt5 REQUIRED COMPONENTS Core Widgets WebKit WebKitWidgets LinguistTools PrintSupport)
+set(CMAKE_AUTOMOC ON)
+find_package(Qt5Core REQUIRED)
+find_package(Qt5Widgets REQUIRED)
+find_package(Qt5WebEngineWidgets REQUIRED)
+find_package(Qt5PrintSupport REQUIRED)
+
+if(WITH_L10N)
+	find_package(Qt5LinguistTools)
+endif()
+
+include_directories(${Qt5Widgets_INCLUDE_DIRS})
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
@@ -62,9 +66,11 @@ endif()
 configure_file(${CMAKE_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/config.h)
 
 #*** translation ***
-file (GLOB TRANSLATIONS_FILES "ressources/translations/*.ts")
-qt5_add_translation(QM_FILES ${readesm_SRCS} ${TRANSLATIONS_FILES})
-add_custom_target(translations_target DEPENDS ${QM_FILES})
+if(WITH_L10N)
+	file(GLOB TRANSLATIONS_FILES "resources/translations/*.ts")
+	qt5_add_translation(QM_FILES ${readesm_SRCS} ${TRANSLATIONS_FILES})
+	add_custom_target(translations_target DEPENDS ${QM_FILES})
+endif()
 
 #*** Actual part needed to build everything ***
 include_directories(${QT_INCLUDES} ${CMAKE_BINARY_DIR})
@@ -74,25 +80,22 @@ file(GLOB fileformat_CPP "fileformat/*.cpp" "fileformat/*/*.cpp")
 file(GLOB gui_H "gui/*.h")
 file(GLOB fileformat_H "fileformat/*.h" "fileformat/*/*.h")
 file(GLOB main "*.cpp" "*.h")
-set(readesm_SRCS ${gui_CPP} ${fileformat_CPP} ${gui_H} ${fileformat_H} ${main} ${autogen})
+set(readesm_SRCS ${gui_CPP} ${fileformat_CPP} ${gui_H} ${fileformat_H} ${main})
 set(readesm_RCCS readesm.qrc)
 
 qt5_add_resources(readesm_RCC_SRCS ${readesm_RCCS})
-#qt5_generate_moc(${readesm_SRCS})
+
+#qt5_automoc(${readesm_SRCS})
 
 add_executable(readesm ${GUI_TYPE} ${readesm_SRCS} ${readesm_RCC_SRCS} ${QM_FILES} readesm.rc)
-
-target_link_libraries(readesm ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTWEBKIT_LIBRARY} ${LIBS})
-target_link_libraries(readesm Qt5::Widgets)
-target_link_libraries(readesm Qt5::PrintSupport)
-target_link_libraries(readesm Qt5::WebKitWidgets)
+target_link_libraries(readesm Qt5::Widgets Qt5::WebEngineWidgets Qt5::PrintSupport ${LIBS})
 
 
 #*** .desktop file, icon and mime type ***
 if(UNIX)
-	install(FILES ressources/linux-integration/readesm.desktop DESTINATION share/applications )
-	install(FILES ressources/icons/readesm.png ressources/icons/readesm.svg DESTINATION share/pixmaps )
-	install(FILES ressources/linux-integration/x-esm.xml DESTINATION share/mime/packages )
+	install(FILES resources/linux-integration/readesm.desktop DESTINATION share/applications)
+	install(FILES resources/icons/readesm.png resources/icons/readesm.svg DESTINATION share/pixmaps)
+	install(FILES resources/linux-integration/x-esm.xml DESTINATION share/mime/packages)
 endif()
 
 #*** translation files ***
@@ -129,27 +132,27 @@ set(WEBSITE "http://readesm.sourceforge.net/")
 if(UNIX)
 endif()
 if(APPLE)
-	set(PROGNAME Readesm )
-	set(MACOSX_BUNDLE_ICON_FILE "${CMAKE_SOURCE_DIR}/ressources/icons/readesm.icns")
+	set(PROGNAME ReadESM)
+	set(MACOSX_BUNDLE_ICON_FILE "${CMAKE_SOURCE_DIR}/resources/icons/readesm.icns")
 	set(MACOSX_BUNDLE_SHORT_VERSION_STRING ${VERSION_STRING})
 	set(MACOSX_BUNDLE_VERSION ${VERSION_STRING})
 	set(MACOSX_BUNDLE_LONG_VERSION_STRING "Version ${VERSION_STRING}")
 endif()
 if(WIN32)
-	set(CPACK_PACKAGE_EXECUTABLES "readesm" "readesm")
+	set(CPACK_PACKAGE_EXECUTABLES "readesm;ReadESM")
 	set(CPACK_NSIS_URL_INFO_ABOUT "${WEBSITE}")
 	set(CPACK_NSIS_HELP_LINK "${WEBSITE}/help.html")
 
-	set(CPACK_NSIS_MUI_ICON "${CMAKE_SOURCE_DIR}/ressources/icons/readesm.ico")
+	set(CPACK_NSIS_MUI_ICON "${CMAKE_SOURCE_DIR}/resources/icons/readesm.ico")
 	set(CPACK_NSIS_MUI_UNIICON ${CPACK_NSIS_MUI_ICON})
 	set(CPACK_NSIS_INSTALLED_ICON_NAME "bin\\\\readesm.exe")
 
-	set(CPACK_NSIS_MENU_LINKS "${WEBSITE}" "Homepage for Readesm")
+	set(CPACK_NSIS_MENU_LINKS "${WEBSITE}" "Homepage for ReadESM")
 
 	# File types association:
 	set(FILETYPE_DESCRIPTION "Digitaltachograph data")
 	set(EXTENSIONS ddd esm add tgd)
-	set(CPACK_NSIS_DEFINES "!include ${PROJECT_SOURCE_DIR}\\\\ressources\\\\windows-integration\\\\FileAssociation.nsh")
+	set(CPACK_NSIS_DEFINES "!include ${PROJECT_SOURCE_DIR}\\\\resources\\\\windows-integration\\\\FileAssociation.nsh")
 	foreach(EXTENSION ${EXTENSIONS})
 		set(NSIS_INSTALL_EXT "${NSIS_INSTALL_EXT}\n\\\${registerExtension} \\\"\\\$INSTDIR\\\\bin\\\\readesm.exe\\\" \\\".${EXTENSION}\\\" \\\"${FILETYPE_DESCRIPTION}\\\"")
 		set(NSIS_UNINSTALL_EXT "${NSIS_UNINSTALL_EXT}\n\\\${unregisterExtension} \\\".${EXTENSION}\\\" \\\"${FILETYPE_DESCRIPTION}\\\"")

@@ -1,5 +1,5 @@
-#ifndef SVGDAILYGRAPH_H
-#define SVGDAILYGRAPH_H
+#ifndef SVGDAYGRAPH_H
+#define SVGDAYGRAPH_H
 
 #include "PictureGenerator.h"
 

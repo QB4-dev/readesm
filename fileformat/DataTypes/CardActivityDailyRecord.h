@@ -7,10 +7,11 @@
 
 
 class CardActivityDailyRecord : public RawCardActivityDailyRecord {
+	Q_DECLARE_TR_FUNCTIONS(CardActivityDailyRecord)
 public:
 	Subblocks<ActivityChangeInfo> activityChangeInfos;
 
-	CardActivityDailyRecord(const DataPointer& start);
+	explicit CardActivityDailyRecord(const DataPointer& start);
 	int size() const;
 	void printOn(Reporter& o) const;
 	QString title() const;

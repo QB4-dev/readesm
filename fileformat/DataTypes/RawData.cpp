@@ -1,8 +1,8 @@
 #include "RawData.h"
 
-RawData::RawData(const DataPointer& start_, int length) :
-	DataType(start_),
-	DataPointer(start_),
+RawData::RawData(const DataPointer& start, int length) :
+	DataType(start),
+	DataPointer(start),
 	length_(length)
 {}
 
@@ -12,25 +12,29 @@ RawData::RawData(const QByteArray& data_) :
 	length_(data_.size())
 {}
 
-QString RawData::toString() const{
+QString RawData::toString() const {
 	bool allzeros = true;
-	for(int j = 0; j < size(); ++j){
-		if(start[j] != 0){
+	for (int j = 0; j < size(); ++j) {
+		if (start[j] != 0) {
 			allzeros = false;
 			break;
 		}
 	}
-	if(allzeros) return tr("All %1 Byte are zeroed.").arg(size());
+	if (allzeros) {
+		return tr("All %1 Byte are zeroed.").arg(size());
+	}
 	QString rv;
-	for(int j = 0; j < size(); ++j) rv.append(QString("%1 ").arg(start[j], 2, 16, QChar('0')));
+	for (int j = 0; j < size(); ++j) {
+		rv.append(QString("%1 ").arg(start[j], 2, 16, QChar('0')));
+	}
 	return rv;
 }
 
-void RawData::printOn(Reporter& report) const{
+void RawData::printOn(Reporter& report) const {
 	report.tagValuePair("Raw data(hex encoded)", toString());
 }
 
-QString RawData::className() const{
+QString RawData::className() const {
 	return "RawData";
 }
 

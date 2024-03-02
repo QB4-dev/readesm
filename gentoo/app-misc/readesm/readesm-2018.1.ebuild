@@ -4,15 +4,15 @@
 
 EAPI="6"
 
-inherit cmake-utils subversion
+inherit cmake-utils
 
 DESCRIPTION="digital tachograph file reader"
 HOMEPAGE="http://readesm.sourceforge.net/"
-ESVN_REPO_URI="https://svn.code.sf.net/p/readesm/code/"
+SRC_URI="mirror://sourceforge/${PN}/${P}-src.tar.xz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 IUSE="nls"
 
 DEPEND=">=dev-libs/boost-1.63.0

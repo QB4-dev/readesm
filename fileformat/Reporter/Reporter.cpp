@@ -2,29 +2,27 @@
 
 #include "../Block.h"
 
-#include <QtCore/QDebug>
-#include <QtCore/QTextCodec>
+#include <QDebug>
+#include <QTextCodec>
 
-void Reporter::setTitle(const QString& newTitle){
+void Reporter::setTitle(const QString& newTitle) {
 	title = newTitle;
 }
 
-void Reporter::tagValuePair(const QString& tag, int value){
+void Reporter::tagValuePair(const QString& tag, int value) {
 	tagValuePair(tag, QString("%1").arg(value));
 }
 
-Reporter::Reporter() : nestLevel(0), collected(), collector(&collected)
-{
+Reporter::Reporter() : nestLevel(0), collected(), collector(&collected) {
 	collector.setCodec(QTextCodec::codecForName("UTF-8"));
 }
 
-bool Reporter::isSSS(){
-   return sss;
-}
-
-void Reporter::writeBlock(const Block& value, const QString& tag){
+void Reporter::writeBlock(const Block& value, const QString& tag) {
 	++nestLevel;
-	if(tag == "" && value.title() != "") subBlock(value, value.title());
-	else subBlock(value, tag);
+	if (tag.isEmpty() && !value.title().isEmpty()) {
+		subBlock(value, value.title());
+	} else {
+		subBlock(value, tag);
+	}
 	--nestLevel;
 }

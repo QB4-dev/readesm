@@ -16,7 +16,8 @@
 
 #include "formatStrings.h"
 
-#include <QtCore/QTextStream>
+#include <QString>
+#include <QTextStream>
 
 QString formatStrings::eventType(unsigned char etype) {
 	QString rv;
@@ -24,7 +25,7 @@ QString formatStrings::eventType(unsigned char etype) {
 	int major = etype >> 4;
 	int minor = etype & 0xF;
 	o << int(etype) << " - ";
-	if(major == 0) {
+	if (major == 0) {
 		o << tr("General events: ");
 		const char* generalEvents[] = {
 			QT_TR_NOOP("No further details"),
@@ -38,9 +39,12 @@ QString formatStrings::eventType(unsigned char etype) {
 			QT_TR_NOOP("Power supply interruption"),
 			QT_TR_NOOP("Motion data error")
 		};
-		if(minor <= 0x9) o << tr(generalEvents[minor]);
-		else o << tr("RFU");
-	} else if(major == 1) {
+		if (minor <= 0x9) {
+			o << tr(generalEvents[minor]);
+		} else {
+			o << tr("RFU");
+		}
+	} else if (major == 1) {
 		o << tr("Vehicle unit related security breach attempt events: ");
 		const char* sevents[] = {
 			QT_TR_NOOP("No further details"),
@@ -53,9 +57,12 @@ QString formatStrings::eventType(unsigned char etype) {
 			QT_TR_NOOP("Unauthorised case opening"),
 			QT_TR_NOOP("Hardware sabotage")
 		};
-		if(minor <= 0x8) o << tr(sevents[minor]);
-		else o << tr("RFU");
-	} else if(major == 2) {
+		if (minor <= 0x8) {
+			o << tr(sevents[minor]);
+		} else {
+			o << tr("RFU");
+		}
+	} else if (major == 2) {
 		o << tr("Sensor related security breach attempt events: ");
 		const char* sevents[] = {
 			QT_TR_NOOP("No further details"),
@@ -64,9 +71,12 @@ QString formatStrings::eventType(unsigned char etype) {
 			QT_TR_NOOP("Internal data transfer error"),
 			QT_TR_NOOP("Unauthorised case opening"),
 			QT_TR_NOOP("Hardware sabotage") };
-		if(minor <= 0x5) o << tr(sevents[minor]);
-		else o << tr("RFU");
-	} else if(major == 3) {
+		if (minor <= 0x5) {
+			o << tr(sevents[minor]);
+		} else {
+			o << tr("RFU");
+		}
+	} else if (major == 3) {
 		o << tr("Recording equipment faults: ");
 		const char* sevents[] = {
 			QT_TR_NOOP("No further details"),
@@ -76,18 +86,26 @@ QString formatStrings::eventType(unsigned char etype) {
 			QT_TR_NOOP("Downloading fault"),
 			QT_TR_NOOP("Sensor fault")
 		};
-		if(minor <= 0x5) o << tr(sevents[minor]);
-		else o << tr("RFU");
-	} else if(major == 4) {
+		if (minor <= 0x5) {
+			o << tr(sevents[minor]);
+		} else {
+			o << tr("RFU");
+		}
+	} else if (major == 4) {
 		o << tr("Card faults: ");
 		const char* sevents[] = { "No further details" };
-		if(minor <= 0x1) o << tr(sevents[minor]);
-		else o << tr("RFU");
-	} else if(major >= 5 && major <= 7) {
+		if (minor <= 0x1) {
+			o << tr(sevents[minor]);
+		} else {
+			o << tr("RFU");
+		}
+	} else if (major >= 5 && major <= 7) {
 		o << tr("RFU groups");
-	} else if(major >= 8 && major <= 0xF) {
+	} else if (major >= 8 && major <= 0xF) {
 		o << tr("Manufacturer specific");
-	} else o << tr("(error: blame programmer)");
+	} else {
+		o << tr("(error: blame programmer)");
+	}
 	return rv;
 }
 
@@ -102,12 +120,15 @@ QString formatStrings::eventRecordPurpose(unsigned char etype) {
 		QT_TR_NOOP("the first event or fault having occurred after the last calibration"),
 		QT_TR_NOOP("an active/on-going event or fault")
 	};
-	if(etype <= 7) return tr(recordingPurposes[etype]).prepend("%1 - ").arg(etype);
-	else if(8 <= etype && etype <= 0x7F) {
-		return tr("RFU").prepend("%1 - ").arg(etype);
-	} else if(0x80 <= etype && etype <= 0x7F) {
-		return tr("Manufacturer specific").prepend("%1 - ").arg(etype);
-	} else return tr("(err:blame programmer)").prepend("%1 - ").arg(etype);
+	if (etype <= 7) {
+		return tr(recordingPurposes[etype]);
+	} else if (8 <= etype && etype <= 0x7F) {
+		return tr("RFU");
+	} else if (0x80 <= etype && etype <= 0xFF) {
+		return tr("Manufacturer specific");
+	} else {
+		return tr("(error: blame programmer)");
+	}
 }
 
 QString formatStrings::nationNumeric(unsigned char country) {
@@ -164,16 +185,27 @@ QString formatStrings::nationNumeric(unsigned char country) {
 		QT_TR_NOOP("Ukraine"),
 		QT_TR_NOOP("Vatican City"),
 		QT_TR_NOOP("Yugoslavia"),
-		QT_TR_NOOP("Montenegro"), //new ones only found on dtc.jrc.it
+		QT_TR_NOOP("Montenegro"), //new ones only found on https://dtc.jrc.ec.europa.eu/
 		QT_TR_NOOP("Serbia"),
-		QT_TR_NOOP("Uzbekistan")
+		QT_TR_NOOP("Uzbekistan"),
+		QT_TR_NOOP("Tajikistan")
 	};
-	if(country <= 0x36) return tr(countries[country]).prepend("%1 - ").arg(country);
-	if(country <= 0xFC) return tr("%1 - Reserved for future use").arg(country);
-	if(country == 0xFD) return tr("European Community").prepend("%1 - ").arg(country);
-	if(country == 0xFE) return tr("Europe, but not EC and not registered").prepend("%1 - ").arg(country);
-	if(country == 0xFF) return tr("outside of Europe, not registered").prepend("%1 - ").arg(country);
-	return tr("error in nationNumeric").prepend("%1 - ").arg(country);
+	if (country <= 0x37) {
+		return tr(countries[country]);
+	}
+	if (country <= 0xFC) {
+		return tr("%1 - Reserved for future use").arg(country);
+	}
+	if (country == 0xFD) {
+		return tr("European Community");
+	}
+	if (country == 0xFE) {
+		return tr("Europe, but not EC and not registered");
+	}
+	if (country == 0xFF) {
+		return tr("outside of Europe, not registered");
+	}
+	return tr("error in nationNumeric");
 }
 
 QString formatStrings::specificCondition(unsigned char scond) {
@@ -183,8 +215,11 @@ QString formatStrings::specificCondition(unsigned char scond) {
 		QT_TR_NOOP("Out of scope - End"),
 		QT_TR_NOOP("Ferry/Train crossing")
 	};
-	if(scond <= 0x3) return tr(specificConditions[scond]).prepend("%1 - ").arg(scond);
-	else return tr("RFU").prepend("%1 - ").arg(scond);
+	if (scond <= 0x3) {
+		return tr(specificConditions[scond]);
+	} else {
+		return tr("RFU");
+	}
 }
 
 QString formatStrings::calibrationPurpose(unsigned char cpurp) {
@@ -195,18 +230,29 @@ QString formatStrings::calibrationPurpose(unsigned char cpurp) {
 		QT_TR_NOOP("installation: first calibration of the VU in the current vehicle"),
 		QT_TR_NOOP("periodic inspection")
 	};
-	if(cpurp <= 4) return tr(cpurps[cpurp]).prepend("%1 - ").arg(cpurp);
-	else return tr("(not specified)").prepend("%1 - ").arg(cpurp);
+	if (cpurp <= 4) {
+		return tr(cpurps[cpurp]);
+	} else {
+		return tr("(not specified)");
+	}
 }
 
 QString formatStrings::controlType(unsigned char ctype) {
 	QString rv;
 	QTextStream o(&rv);
-	if(ctype & (1 << 7)) o << tr("card downloaded") << ", ";
-	if(ctype & (1 << 6)) o << tr("VU downloaded") << ", ";
-	if(ctype & (1 << 5)) o << tr("printing done") << ", ";
-	if(ctype & (1 << 4)) o << tr("display used") << ", ";
-	return rv.prepend("%1 - ").arg(ctype);
+	if (ctype & (1 << 7)) {
+		o << tr("card downloaded") << ", ";
+	}
+	if (ctype & (1 << 6)) {
+		o << tr("VU downloaded") << ", ";
+	}
+	if (ctype & (1 << 5)) {
+		o << tr("printing done") << ", ";
+	}
+	if (ctype & (1 << 4)) {
+		o << tr("display used") << ", ";
+	}
+	return rv;
 }
 
 QString formatStrings::equipmentType(unsigned char value) {
@@ -220,8 +266,11 @@ QString formatStrings::equipmentType(unsigned char value) {
 		QT_TR_NOOP("Vehicle Unit"),
 		QT_TR_NOOP("Motion Sensor")
 	};
-	if(value <= 7) return tr(vals[value]).prepend("%1 - ").arg(value);
-	else return tr("RFU: %1").arg(value).prepend("%1 - ").arg(value);	/* TODO */
+	if (value <= 7) {
+		return tr(vals[value]);
+	} else {
+		return tr("RFU: %1").arg(value);
+	}
 }
 
 QString formatStrings::dailyWorkPeriod(unsigned char value) {
@@ -231,13 +280,16 @@ QString formatStrings::dailyWorkPeriod(unsigned char value) {
 		QT_TR_NOOP("Begin, related time manually entered (start time)"),
 		QT_TR_NOOP("End, related time manually entered (end of work period)"),
 		QT_TR_NOOP("Begin, related time assumed by VU"),
-		QT_TR_NOOP("End, related time assumed by VU ")
+		QT_TR_NOOP("End, related time assumed by VU")
 	};
-	if(value <= 5) return tr(vals[value]).prepend("%1 - ").arg(value);
-	else return tr("(not specified: %1)").arg(value).prepend("%1 - ").arg(value);	/* TODO */
+	if (value <= 5) {
+		return tr(vals[value]);
+	} else {
+		return tr("(not specified: %1)").arg(value);
+	}
 }
 
-QString formatStrings::regionNumeric(unsigned char value) {
+QString formatStrings::regionNumeric(unsigned char region) {
 	const char* vals[] = {
 		QT_TR_NOOP("No information available"),
 		QT_TR_NOOP("Andalucía"),
@@ -256,10 +308,15 @@ QString formatStrings::regionNumeric(unsigned char value) {
 		QT_TR_NOOP("Madrid"),
 		QT_TR_NOOP("Murcia"),
 		QT_TR_NOOP("Navarra"),
-		QT_TR_NOOP("País Vasco")
+		QT_TR_NOOP("País Vasco"),
+		QT_TR_NOOP("Ceuta"),
+		QT_TR_NOOP("Melilla")
 	};
-	if(value <= 0x11) return tr(vals[value]).prepend("%1 - ").arg(value);
-	else return tr("Unknown region %1").arg(value).prepend("%1 - ").arg(value);	/* TODO */
+	if (region <= 0x13) {
+		return tr(vals[region]);
+	} else {
+		return tr("Unknown region %1").arg(region);
+	}
 }
 
 QString formatStrings::previous(const QString& now, const QString& past) {
@@ -267,44 +324,70 @@ QString formatStrings::previous(const QString& now, const QString& past) {
 }
 
 QString formatStrings::previous(const QString& now, const QString& past, const QString& ancientpast) {
-	return tr("%1  (formerly %2 and before that %3)").arg(now, past, ancientpast);
+	return tr("%1 (formerly %2 and before that %3)").arg(now, past, ancientpast);
 }
 
-///Manufacturer codes as found on dtc.jrc.it
-QString formatStrings::manufacturerCode(unsigned char code) {		/* TODO */
-	switch(code){
-	case 0x00: return tr("No information available");
-	case 0x01: return tr("Reserved value");
-	case 0x10: return "Actia S.A.";
-	case 0x12: return "Austria Card Plastikkarten und Ausweissysteme GmbH";
-	case 0x13: return "Agencija za komercijalnu djelatnost d.o.o (AKD)";
-	case 0x20: return "CETIS d.d.";
-	case 0x21: return "certSIGN";
-	case 0x22: return "RUE Cryptotech";
-	case 0x30: return previous("Sdu Identification B.V.", "Enschedé/Sdu B.V.");
-	case 0x32: return "EFKON AG.";
-	case 0x38: return "Fábrica Nacional de Moneda y Timbre";
-	case 0x40: return "Giesecke & Devrient GmbH";
-	case 0x43: return "Giesecke & Devrient GB Ltd.";
-	case 0x44: return "Giesecke & Devrient sa/nv";
-	case 0x48: return "Hungarian Banknote Printing Co. Ltd.";
-	case 0x50: return "Imprimerie Nationale";
-	case 0x51: return "Imprensa Nacional-Casa da Moeda, SA";
-	case 0x52: return "InfoCamere S.C.p.A";
-	case 0x81: return previous("Morpho e-documents", "Sagem Orga", "ORGA Kartensysteme GmbH");
-	case 0x82: return "ORGA Zelenograd ZAO";
-	case 0x88: return previous("Asseco Czech Republic a.s.", "PVT a.s.");
-	case 0x89: return "Polska Wytwórnia Papierów Wartosciowych S.A. - PWPW S.A.";
-	case 0xA1: return previous("Continental Automotive GmbH", "Siemens AG - Siemens VDO Automotive");
-	case 0xA2: return "Stoneridge Electronics AB";
-	case 0xA3: return previous("Gemalto", "Schlumberger SEMA, Axalto");
-	case 0xA4: return "3M Security Printing and Systems Ltd.";
-	case 0xD8: return "Union of Chambers and Commodity Exchanges of Turkey - TOBB";
-	case 0xAB: return "T-Systems International GmbH";
-	case 0xAC: return "Trüb AG";
-	case 0xAD: return "Trüb Baltic AS";
-	case 0xAE: return "TEMPEST a.s.";
-	case 0xAF: return "Trueb - DEMAX PLC";
+QString formatStrings::previous(const QString& now, const QString& past, const QString& ancientpast, const QString& prehistory) {
+	return tr("%1 (formerly %2, before that %3 and before that %4)").arg(now, past, ancientpast, prehistory);
+}
+
+///Manufacturer codes as found on https://dtc.jrc.ec.europa.eu/
+QString formatStrings::manufacturerCode(unsigned char code) {
+	switch (code) {
+		case 0x00: return tr("No information available");
+		case 0x01: return tr("Reserved value");
+		case 0x10: return "Actia S.A.";
+		case 0x11: return "Security Printing and Systems Ltd.";
+		case 0x12: return previous("Austria Card Plastikkarten und Ausweissysteme GmbH", "Austria Card");
+		case 0x13: return "Agencija za komercijalnu djelatnost d.o.o (AKD)";
+		case 0x15: return "ASELSAN";
+		case 0x17: return "Real Casa de la Moneda";
+		case 0x18: return "BARBÉ S.R.L.";
+		case 0x20: return "CETIS d.d.";
+		case 0x21: return "certSIGN";
+		case 0x22: return "RUE Cryptotech";
+		case 0x23: return "Centr Modernizatcii Transporta OOO (CMT - LLC)";
+		case 0x24: return "Pars Ar-Ge Ltd";
+		case 0x28: return "Datakom";
+		case 0x29: return "DVLA";
+		case 0x30: return previous("IDEMIA The Netherlands BV", "Morpho BV", "Sdu Identification B.V.", "Enschedé/Sdu B.V.");
+		case 0x32: return previous("intellic GmbH", "EFKON AG.");
+		case 0x38: return "Fábrica Nacional de Moneda y Timbre";
+		case 0x39: return "First Print Yard";
+		case 0x40: return "Giesecke & Devrient GmbH";
+		case 0x43: return "Giesecke & Devrient GB Ltd.";
+		case 0x44: return "Giesecke & Devrient sa/nv";
+		case 0x45: return "GrafoCARD";
+		case 0x48: return previous("Hungarian Banknote Printing Co. Ltd.", "PJRT");
+		case 0x50: return "Imprimerie Nationale";
+		case 0x51: return "Imprensa Nacional-Casa da Moeda, SA";
+		case 0x52: return "InfoCamere S.C.p.A";
+		case 0x61: return "KazTACHOnet LLP";
+		case 0x68: return "LESIKAR a.s.";
+		case 0x69: return "LEDA-SL";
+		case 0x78: return "NAP automotive Produkte GmbH";
+		case 0x81: return previous("Morpho e-documents", "Sagem Orga", "ORGA Kartensysteme GmbH");
+		case 0x82: return "ORGA Zelenograd ZAO";
+		case 0x84: return "ORGA Kartensysteme GmbH";
+		case 0x88: return previous("Asseco Czech Republic a.s.", "PVT a.s.");
+		case 0x89: return "Polska Wytwórnia Papierów Wartosciowych S.A. - PWPW S.A.";
+		case 0x8A: return "Papiery Powlekane Pasaco Sp. z o.o.";
+		case 0x98: return "TahoNetSoft";
+		case 0xA1: return previous("Continental Automotive GmbH", "Siemens AG", "Siemens VDO Automotive", "Siemens Automotive");
+		case 0xA2: return "Stoneridge Electronics AB";
+		case 0xA3: return previous("Gemalto", "Schlumberger SEMA, Axalto");
+		case 0xA4: return "3M Security Printing and Systems Ltd.";
+		case 0xA5: return "STMicroelectronics - Incard Division";
+		case 0xA6: return "STÁTNÍ TISKÁRNA CENIN, státní podnik";
+		case 0xAB: return "T-Systems International GmbH";
+		case 0xAC: return previous("Gemalto AG", "Trüb AG");
+		case 0xAD: return "Trüb Baltic AS";
+		case 0xAE: return "TEMPEST a.s.";
+		case 0xAF: return "Trueb - DEMAX PLC";
+		case 0xB0: return "TAYROL LIMITED";
+		case 0xB1: return "UŽDAROJI AKCINĖ BENDROVĖ \"LODVILA\"";
+		case 0xD8: return "Union of Chambers and Commodity Exchanges of Turkey - TOBB";
+		case 0xE0: return "Turker Roll Paper Trade";
 	}
 	return tr("Unknown Manufacturer %1 or equipment not type approved").arg(code);
 }

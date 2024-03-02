@@ -1,4 +1,25 @@
-Readesm changelog
+ReadESM changelog
+2018.1
+* Update manufacturers
+* Update Spain Region Codes: add support for Ceuta and Melilla
+* Update nation codes: add support for Tajikistan
+* Add support for ISO/IEC 8859-7 "Latin/Greek" encoded fields
+* Fix bug #4 "Problem showing Help page on readesm-2011.12pre1"
+* Fix bugs #6 and #8: BCDs are parsed as big endian integers
+* Fix bug #7 "CardDriverActivity::readCyclicData() algorithm loses data"
+* Fix bug #9 "Premature end of document"
+* Fix bug: Uninitialized read in HtmlReporter
+* Fix bug: Manufacturer specific types in EventFaultRecordPurpose not recognized
+* Fix bug: following anchor links in a report in ReadESM leads to errors or blank pages
+* Fix minor memory leaks
+* Migrate from Qt4 to Qt5
+* Migrate from QWebKit to QWebEngine
+* More documentation
+* Lots of minor optimizations, spelling fixes, HTML fixes, link fixes, code hardening and cleanups
+* Translation updates
+* Stricter adherence to standards and conventions
+* Drop compatibility with Netscape Navigator 4
+
 2011-11
 + optical fixes
 

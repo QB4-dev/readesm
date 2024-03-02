@@ -1,15 +1,17 @@
 #include "FullCardNumber.h"
 
-FullCardNumber::FullCardNumber(DataPointer filewalker) : RawFullCardNumber(filewalker)
+FullCardNumber::FullCardNumber(const DataPointer& filewalker) : RawFullCardNumber(filewalker)
 {}
 
-QString FullCardNumber::toString() const{
-	if(mapCardNumberToName().contains(cardNumber)){
+QString FullCardNumber::toString() const {
+	if (mapCardNumberToName().contains(cardNumber)) {
 		return tr("%1, card holder: %2")
 			.arg(RawFullCardNumber::toString())
 			.arg(mapCardNumberToName().value(cardNumber));
 	}
-	if(cardNumber == "") return "";
+	if (cardNumber.isEmpty()) {
+		return QString();
+	}
 	return RawFullCardNumber::toString();
 }
 
@@ -17,7 +19,7 @@ void FullCardNumber::printOn(Reporter& o) const {
 	RawFullCardNumber::printOn(o);
 }
 
-QMap<QString, QString>& FullCardNumber::mapCardNumberToName(){
+QMap<QString, QString>& FullCardNumber::mapCardNumberToName() {
 	static QMap<QString, QString>* map = new QMap<QString, QString>();
 	return *map;
 }

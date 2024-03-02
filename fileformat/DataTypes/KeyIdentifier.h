@@ -3,12 +3,12 @@
 
 #include "DataType.h"
 
-#include <QtCore/QSharedPointer>
+#include <QSharedPointer>
 
 class KeyIdentifier : public DataType {
 	Q_DECLARE_TR_FUNCTIONS(KeyIdentifier)
 public:
-	KeyIdentifier(const DataPointer& filewalker);
+	explicit KeyIdentifier(const DataPointer& filewalker);
 	void printOn(Reporter& o) const;
 	QString className() const;
 	int size() const;

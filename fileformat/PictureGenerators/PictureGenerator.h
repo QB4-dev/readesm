@@ -1,10 +1,9 @@
 #ifndef PICTUREGENERATOR_H
-#define PICTUREGENERATOR_H PICTUREGENERATOR_H
+#define PICTUREGENERATOR_H
 
-#include <QtCore/QCoreApplication>
-#include <QtCore/QString>
-#include <QtCore/QTextStream>
-
+#include <QCoreApplication>
+#include <QString>
+#include <QTextStream>
 
 class PictureGenerator {
 public:
@@ -18,6 +17,6 @@ protected:
 	PictureGenerator();
 	QString collected;
 	QTextStream collector;
-	bool finished;
 };
+
 #endif

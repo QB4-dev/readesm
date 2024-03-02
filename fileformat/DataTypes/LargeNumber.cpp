@@ -3,6 +3,9 @@
 
 #include "LargeNumber.h"
 
+#include "../DataPointer.h"
+#include <QString>
+
 LargeNumber::LargeNumber(const DataPointer& start, int length) {
 	mpz_init(t);
 	mpz_import(t, length, 1, 1, 0, 0, start.toUnsignedPointer());
@@ -26,10 +29,18 @@ LargeNumber& LargeNumber::operator=(const LargeNumber& o) {
 }
 
 QString LargeNumber::toString() const {
-	QString temp = mpz_get_str(NULL, 10, t);
-	//split in groups of three
-	for(int j = temp.length(); j > 0; j -= 3) temp.insert(j,' ');
-	return temp;
+	//This is madness
+	char *base10String = mpz_get_str(NULL, 10, t);
+	QString res = QString(base10String);
+	void (*mpfree) (void *, size_t);
+	mp_get_memory_functions (NULL, NULL, &mpfree);
+	mpfree(base10String, strlen(base10String) + 1);
+
+	//split in groups of three (avoid space artifact after last triple)
+	for (int j = res.length() - 3; j > 0; j -= 3) {
+		res.insert(j, ' ');
+	}
+	return res;
 }
 
 #endif

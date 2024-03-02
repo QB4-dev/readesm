@@ -1,10 +1,14 @@
 #include "loadFile.h"
 
-#include <QtCore/QFile>
+#include <QByteArray>
+#include <QFile>
+#include <QString>
 
-QByteArray loadFile(const QString& filename){
+QByteArray loadFile(const QString& filename) {
 	QFile file(filename);
-	if (!file.open(QIODevice::ReadOnly));
+	if (!file.open(QIODevice::ReadOnly)) {
+		//TODO: error handling;
+	}
 	QByteArray content = file.readAll();
 	file.close();
 	return content;

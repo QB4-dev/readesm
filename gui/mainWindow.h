@@ -1,31 +1,34 @@
-#ifndef mainWindow_H
-#define mainWindow_H
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
 
+#include "InMemoryUrlSchemeHandler.h"
+
+#include <QByteArray>
 #include <QMainWindow>
 #include <QSharedPointer>
-#include <QByteArray>
 
 class EsmFile;
-class QString;
-class QWebView;
 
-class mainWindow : public QMainWindow
-{
+class QString;
+class QWebEngineView;
+
+class mainWindow : public QMainWindow {
 	Q_OBJECT
 	private:
+		InMemoryUrlSchemeHandler schemeHandler;
 		QSharedPointer<EsmFile> esm;
 		QByteArray htmlContent;
 	public:
-		QWebView* view;
+		QWebEngineView* view;
 		mainWindow();
 	public slots:
+		void helpAbout();
+		void helpContents();
 		void openFile();
 		void openFile(const QString& filename);
-		void helpContents();
 		void print();
-		void saveRaw();
 		void saveHtml();
-		void helpAbout();
+		void saveRaw();
 };
 
 #endif

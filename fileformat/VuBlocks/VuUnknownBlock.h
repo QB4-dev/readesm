@@ -2,15 +2,16 @@
 #define VUUNKNOWNBLOCK_H
 
 #include "VuBlock.h"
+#include "../DataTypes/RawData.h"
 
 /** This block is for debugging, in case the program encounters
  * some data it so far cannot read, it reports hex data and as
- * many useful information as possible **/
+ * many useful information as possible */
 class VuUnknownBlock : public VuBlock {
 	Q_DECLARE_TR_FUNCTIONS(VuUnknownBlock)
 	public:
 	RawData data;
-	VuUnknownBlock(const DataPointer& start);
+	explicit VuUnknownBlock(const DataPointer& start);
 
 	virtual int size() const;
 

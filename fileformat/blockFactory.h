@@ -1,9 +1,10 @@
 #ifndef BLOCKFACTORY_H
 #define BLOCKFACTORY_H
 
-#include "TopLevelBlock.h"
+#include <QSharedPointer>
 
-#include <QtCore/QSharedPointer>
+class DataPointer;
+class TopLevelBlock;
 
 QSharedPointer<TopLevelBlock> blockFactory(const DataPointer& start);
 

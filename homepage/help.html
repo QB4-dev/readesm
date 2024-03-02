@@ -1,21 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>Readesm Documentation</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<link rel="stylesheet" type="text/css" href="style.css" />
+		<title>ReadESM Documentation</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<link rel="stylesheet" type="text/css" href="style.css"/>
 	</head>
 	<body>
-		<h1>Readesm Documentation</h1>
-<p>Digital Tachographs are a compulsory equipment for trucks heavier than 3.5 tons within the
-European Union.  Readesm converts the binary data retrieved from the tachograph or driver card into human-readable form.  The ESM files Readesm can read typically have extensions <i>.tgd</i>, <i>.esm</i>, <i>.ddd</i> or <i>.add</i>.</p>
+		<h1>ReadESM Documentation</h1>
+<p>Digital Tachographs are a compulsory equipment for trucks heavier than 3.5 tons within the European Union. ReadESM converts the binary data retrieved from the tachograph or driver card into human-readable form. The ESM files ReadESM can read typically have extensions <i>.tgd</i>, <i>.esm</i>, <i>.ddd</i> or <i>.add</i>.</p>
 
 <h2>Contents</h2>
 <ol>
 	<li><a href="#installation">Installation</a>
-		<ol>		
+		<ol>
 			<li><a href="#windows">Windows</a></li>
-			<li><a href="#windowscompiling">Compiling in Windows</a></li>
+			<li><a href="#windowscompiling">Compiling on Windows</a></li>
 			<li><a href="#ubuntu">Ubuntu packages</a></li>
 			<li><a href="#compiling">Compiling</a></li>
 			<li><a href="#devversion">Subversion repository</a></li>
@@ -26,78 +25,73 @@ European Union.  Readesm converts the binary data retrieved from the tachograph 
 		<ol>
 			<li><a href="#legislation">Where can I get the documentation for the tachograph file format?</a></li>
 			<li><a href="#downloadvu">How can I download the data from the vehicle unit?</a></li>
-			<li><a href="#28days">Doesn't the driver card just hold 28 days of data?</a></li>
+			<li><a href="#days">Doesn't the driver card just hold 28 days of data?</a></li>
 			<li><a href="#secure">How secure is the cryptographic system?</a></li>
 		</ol>
 	</li>
 	<li><a href="#modifying">Modifying the program</a></li>
-	<li><a href="#ressources">Ressources</a></li>
+	<li><a href="#resources">Resources</a></li>
 	<li><a href="#help">Getting further help</a></li>
-	<li><a href="#acknowledgements">Acknowledgements</a></li>
-
+	<li><a href="#acknowledgments">Acknowledgments</a></li>
 </ol>
 
-<h2><a name="installation"></a>Installation</h2>
+<h2 id="installation">Installation</h2>
 
-<h3><a name="windows"></a>Windows</h3>
-<p>Download the <a href="http://sourceforge.net/projects/readesm/files/readesm/2011-10/readesm-2011.10-win32.exe/download">Installer</a>.  Execute it, then start readesm from the start menu.  You will have to associate it with tachograph files yourself.  Note that the windows version does not check the RSA signatures.</p>
+<h3 id="windows">Windows</h3>
+<p>Download the <a href="https://sourceforge.net/projects/readesm/files/readesm/2011-10/readesm-2011.10-win32.exe/download">Installer</a>. Execute it, then start ReadESM from the start menu. You will have to associate it with tachograph files yourself. Note that the windows version does not check the RSA signatures.</p>
 
-<h3><a name="windowscompiling"></a>Compiling in Windows</h3>
-<p>Compiling in windows is not difficult.  You can use the <a href="http://qt.nokia.com/downloads/sdk-windows-cpp">Qt SDK</a>, it already includes MinGW.  You'll also need a version of <a href="http://www.cmake.org/">cmake</a>, and you might want to install a subversion client, for example <a href="http://tortoisesvn.tigris.org/">tortoise svn</a>.</p>
-<p>For simplicity, put the cmake location, the qmake location and the mingw location in the <i>PATH</i> environment variable.  Then open readesm's <i>CMakeLists.txt</i> with qtcreator, and you are ready to go.</p>
+<h3 id="windowscompiling">Compiling on Windows</h3>
+<p>Compiling on Windows is not difficult. You can use the <a href="https://www.qt.io/offline-installers">Qt SDK</a>, it already includes MinGW. You will also need a version of <a href="https://cmake.org/">cmake</a>, and you might want to install a subversion client, for example <a href="https://tortoisesvn.net/">TortoiseSVN</a>.</p>
+<p>For simplicity, put the cmake location, the qmake location and the mingw location in the <i>PATH</i> environment variable. Then open ReadESM's <i>CMakeLists.txt</i> with qtcreator, and you are ready to go.</p>
 
-<h3><a name="ubuntu"></a>Ubuntu packages</h3>
+<h3 id="ubuntu">Ubuntu packages</h3>
 <p>There are precompiled packages in <a href="">my personal package archive</a>.
-Installation in Ubuntu should work by typing</p>
+Installation on Ubuntu should work by typing</p>
 <pre>sudo apt-add-repository ppa:k-2005/ppa
 sudo apt-get update
 sudo apt-get install readesm</pre>
-<p>Afterwards you can start readesm by typing <i>readesm</i> on the command line,
+<p>Afterwards you can start ReadESM by typing <i>readesm</i> on the command line,
 and associate a file extension with it.</p>
 
-<h3><a name="compiling"></a>Compiling</h3>
+<h3 id="compiling">Compiling</h3>
 <p>You can get the program files from
 <a href="http://andreas.goelzer.de/readesm-reading-digital-tachograph-files">
 my homepage</a>, or from
-the <a href="http://sourceforge.net/projects/readesm/">development page</a> 
-at Sourceforge.</p>
+the <a href="https://sourceforge.net/projects/readesm/">development page</a> at SourceForge.</p>
 
 <p>To compile, you need</p>
 <ul>
 	<li>a C++ compiler of your choice,</li>
 	<li>a Makefile parser of your choice,</li>
-	<li><a href="http://www.cmake.org/">cmake</a> as a Makefile generator,</li>
-	<li>The <a href="http://qt.nokia.com">Qt</a>, specifically the modules
-		QtCore, QtGui and QtWebKit.</li>
+	<li><a href="https://cmake.org/">CMake</a> as a Makefile generator,</li>
+	<li>The <a href="https://www.qt.io/">Qt</a> toolkit, specifically the modules QtCore, QtGui and QtWebKit.</li>
 </ul>
-<p>If you want to check wether the signatures in the tachograph data check out, 
-you also need:</p>
+<p>If you want to check whether the signatures in the tachograph data check out, you also need:</p>
 <ul>
-	<li>the <a href="http://gmplib.org/">Gnu MP Library</a> and</li>
-	<li>the <a href="http://directory.fsf.org/project/libgcrypt/">
-		gcrypt</a> library.</li>
+	<li>the <a href="https://gmplib.org/">GNU MP Library</a> and</li>
+	<li>the <a href="https://directory.fsf.org/wiki/Libgcrypt">gcrypt</a> library.</li>
 </ul>
-<p>If you have all prerequisites installed, unpack a release tarball or get the 
-source from svn, then build with cmake. In Ubuntu you might do something like:</p>
+<p>If you have all prerequisites installed, unpack a release tarball or get the source from the Subversion repository, then build with CMake. On Ubuntu you might do something like:</p>
 <pre>
 sudo apt-get install libqt4-dev qt4-qmake libqtwebkit-dev libgcrypt11-dev libgmp3-dev
 sudo apt-get install cmake build-essential subversion
-svn co https://readesm.svn.sourceforge.net/svnroot/readesm readesm
+svn co https://svn.code.sf.net/p/readesm/code/ readesm
 cd readesm/fileformat
 ./generate.py
 cd ..
 mkdir build
 cd build
-cmake ..
+cmake .. -DWITH_L10N=ON
 make
 sudo make install
 </pre>
-<p>On other systems, use your distributions package manager to get the tools and libraries, and execute <i>make install</i> as root.  You might also want to try checkinstall or build a package for your distribution in another way.</p>
-<p>Readesm installs icons and mime-type-information on unix systems.  If you did not install the ubuntu-package with apt-get, you will have to update your mime database.  In Suse-linux, that means running <i>update-mime-database /usr/local/share/mime</i> as root, in other distributions it might be something similar.</p>
+<p>If you do not want to build localization, you can just omit the switch -DWITH_L10N=ON in the cmake call.</p>
+<p>On other systems, use the package manager of your distribution to get the tools and libraries, and execute <i>make install</i> as root. You might also want to try checkinstall or build a package for your distribution in another way.</p>
+<p>ReadESM installs icons and MIME type information on Unix systems. If you did not install the Ubuntu package with apt-get, you will have to update your MIME database. In SUSE Linux, that means running <i>update-mime-database /usr/local/share/mime</i> as root, in other distributions it might be something similar.</p>
 
-<h3><a name="devversion"></a>Subversion repository</h3>
-<p>If you want the most recent changes and bugfixes or want to help developing, the subversion repository is at <a href="https://readesm.svn.sourceforge.net/svnroot/readesm">https://readesm.svn.sourceforge.net/svnroot/readesm</a>. The repository does not contain the automatically generated code, so you will have to run <i>generate.py</i> in the folder <i>fileformat</i> first.  To compile from svn:</p>
-<pre>svn co https://readesm.svn.sourceforge.net/svnroot/readesm readesm
+<h3 id="devversion">Subversion repository</h3>
+<p>If you want the most recent changes and bugfixes or want to help developing, the Subversion repository is at <a href="https://svn.code.sf.net/p/readesm/code/">https://svn.code.sf.net/p/readesm/code/</a>. The repository does not contain the automatically generated code, so you will have to run <i>generate.py</i> in the folder <i>fileformat</i> first. So, to checkout the code from the repository and build ReadESM you might do something like this:</p>
+<pre>svn co https://svn.code.sf.net/p/readesm/code/ readesm
 cd readesm/fileformat
 ./generate.py
 cd ..
@@ -107,84 +101,81 @@ cmake ..
 make
 </pre>
 
-<h2><a name="running"></a>Starting the program</h2>
-<p>You can use readesm in gui mode or in command line mode:</p>
+<h2 id="running">Starting the program</h2>
+<p>You can use ReadESM in GUI mode or in command line mode:</p>
 <ul>
-	<li>Start readesm with no arguments.  On Unix systems, this should be
+	<li>Start ReadESM with no arguments. On Unix systems, this should be
 	<pre>./readesm</pre>
 	from the directory in which the executable is located, or just
 	<pre>readesm</pre>
-	if readesm is installed somewhere in your PATH.  In the User Interface, open a file by selecting "File, Open" in the Menu bar.</li>
-	<li>If you start readesm with a filename as argument, readesm will try to open that tachograph file and show it in the User Interface.</li>
-	<li>If you start readesm with two filenames as argument, Readesm will assume the first filename to be a tachograph file, and the second filename to be a target file.  It will then try to convert the tachograph file and convert the result into the target file.</li>
+	if ReadESM is installed somewhere in your PATH. In the GUI open a file by selecting "File", "Open…" in the menu bar.</li>
+	<li>If you start ReadESM with a filename as argument, it will try to open that tachograph file and show it in the GUI.</li>
+	<li>If you start ReadESM with two filenames as arguments, it will assume the first filename to be a tachograph file, and the second filename to be a target file. It will then try to convert the tachograph file and convert the result into the target file.</li>
 </ul>
 
 
-<h2><a name="questions"></a>Questions and answers</h2>
+<h2 id="questions">Questions and answers</h2>
 
-<h4><a name="legislation"></a>Where can I get the documentation for the tachograph file format?</h4>
+<h4 id="legislation">Where can I get the documentation for the tachograph file format?</h4>
 <p>The Tachograph file format, download protocol, printout format and basically everything about digital tachographs is defined in
-<a href="http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2002:207:0001:0252:EN:PDF">OJ:L:2002:207, p. 1-252</a>.
-As with all european legislation it is available in several languages, for example</p>
-<ul><li><a href="http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CONSLEG:2002R1360:20020825:EN:PDF">English</a>,</li>
-<li><a href="http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CONSLEG:2002R1360:20020825:ES:PDF">Spanish</a> and</li>
-<li><a href="http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CONSLEG:2002R1360:20020825:DE:PDF">German</a>.</li></ul>
-<p>If you want to view it in another language, replace the <i>EN</i> in the url for the english document with your preferred language code.</p>
+<a href="https://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2002:207:0001:0252:EN:PDF">OJ:L:2002:207, p. 1-252</a>.
+As with all European legislation it is available in several languages, for example</p>
+<ul><li><a href="https://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CONSLEG:2002R1360:20020825:EN:PDF">English</a>,</li>
+<li><a href="https://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CONSLEG:2002R1360:20020825:ES:PDF">Spanish</a> and</li>
+<li><a href="https://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CONSLEG:2002R1360:20020825:DE:PDF">German</a>.</li></ul>
+<p>If you want to view it in another language, replace the <i>EN</i> in the URL for the English document with your preferred language code.</p>
 
 
-<h4><a name="downloadvu"></a>How can I download the data from the vehicle unit?</h4>
-<p>I wrote a little program (<i>loadvu.py</i>) for serial download in python, it is currently in the readesm subversion repository and you can download it from <a href="http://andreas.goelzer.de/serial-download-from-a-digital-tachograph-in-python">my loadvu blog post</a>. As testing it requires a company card and a truck, svn versions are often untested and will often require some hacking to work flawlessly.</p>
+<h4 id="downloadvu">How can I download the data from the vehicle unit?</h4>
+<p>I wrote a little program (<i>loadvu.py</i>) for serial download in Python, it is currently in the ReadESM subversion repository and you can download it from <a href="http://andreas.goelzer.de/serial-download-from-a-digital-tachograph-in-python">my loadvu blog post</a>. As testing it requires a company card and a truck, svn versions are often untested and will often require some hacking to work flawlessly.</p>
 
-<h4><a name="downloadcard"></a>How can I download the data from the driver card?</h4>
-<p>Use <a href="http://developer.berlios.de/projects/fahrlinx/">Fahrlinux</a>.</p>
+<h4 id="downloadcard">How can I download the data from the driver card?</h4>
+<p>Use <a href="https://sourceforge.net/projects/fahrlinx.berlios/">Fahrlinux</a>.</p>
 
-<h4><a name="28days"></a>Doesn't the driver card just hold 28 days of data?</h4>
-<p>Well, no.  The driver cards hold between 5548 byte and 13780 byte of activity data.  That translates to 28 days only if a lot of activity changes have to be recorded.  For most drivers, the card stores about one year of driving records. A possible way to clean the card would be to press <i>break</i> every minute on some slow sunday.</p>
+<h4 id="days">Doesn't the driver card just hold 28 days of data?</h4>
+<p>Well, no. The driver cards hold between 5548 byte and 13780 byte of activity data. That translates to 28 days only if a lot of activity changes have to be recorded. For most drivers, the card stores about one year of driving records. A possible way to clean the card would be to press <i>break</i> every minute on some slow Sunday.</p>
 
-<h4><a name="secure"></a>How secure is the cryptographic system?</h4>
-<p>That depends.  On one hand, the cards and vehicle units use 1024-bit RSA, which is so far reasonable even for really confidential information and not directly breakable.  On the other hand, well...</p>
+<h4 id="secure">How secure is the cryptographic system?</h4>
+<p>That depends. On one hand, the cards and vehicle units use 1024-bit RSA, which is so far reasonable even for really confidential information and not directly breakable. On the other hand, well...</p>
 <ul>
-	<li>There are a lot of different keys used to sign the keys in the individual cards and vehicle units.  So there are many officials one could bribe to get a signed key or even a key usable as CA.</li>
-	<li>The secret keys are on the driver cards and vehicle units, so they already are in the hands of those who have the most interest in hacking them.  This makes various side-channel attacks possible.  Or, with a bit of money, presumably far less than the cost of a new truck, one could also just flat-out read the key data from the flash memory.</li>
+	<li>There are a lot of different keys used to sign the keys in the individual cards and vehicle units. So there are many officials one could bribe to get a signed key or even a key usable as CA.</li>
+	<li>The secret keys are on the driver cards and vehicle units, so they already are in the hands of those who have the most interest in hacking them. This makes various side-channel attacks possible. Or, with a bit of money, presumably far less than the cost of a new truck, one could also just flat-out read the key data from the flash memory.</li>
 </ul>
-<p>So far the cryptographic system itself <i>might</i> be unhacked.  It is far easier to just drive with a borrowed card at night than to retrieve the secret key.  On the other hand, there is some monetary incentive to avoid detection by manipulating the data, and some day this will be enough.</p>
-<p>Please drive carefully, simply sticking to the <i>neccessary</i> law is the simplest way to avoid fines.</p>
+<p>So far the cryptographic system itself <i>might</i> be unhacked. It is far easier to just drive with a borrowed card at night than to retrieve the secret key. On the other hand, there is some monetary incentive to avoid detection by manipulating the data, and some day this will be enough.</p>
+<p>Please drive carefully, simply sticking to the <i>necessary</i> law is the simplest way to avoid fines.</p>
 
-<h2><a name="modifying"></a>Modifying the program</h2>
+<h2 id="modifying">Modifying the program</h2>
 <p>You are free to modify and redistribute the program under the terms of the <a href="http://www.gnu.org/licenses/gpl.html">GPL</a>. Although it is not required, I suggest you contact me if you made any changes or if you plan to do something.</p>
-<p>You do not need to be a programmer to improve Readesm, if you want some texts translated to your native language, just start qtlinguist and type them in.  Or if you think readesm needs a nice icon, create one.</p>
-<p>If you modify the code, some hints:</p>
+<p>You do not need to be a programmer to improve ReadESM, if you want some texts translated into your native language, just start Qt Linguist and type them in. Or if you think ReadESM needs a nice icon, create one.</p>
+<p>If you modify the code, here are some hints:</p>
 <ul>
 	<li>Sometimes I added references to l207.pdf in the comments, that refers to
-	<a href="http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2002:207:0001:0252:EN:PDF">OJ:L:2002:207, p. 1-252</a>, the <a href="#legislation">legislation</a> mentioned above.
+	<a href="https://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2002:207:0001:0252:EN:PDF">OJ:L:2002:207, p. 1-252</a>, the <a href="#legislation">legislation</a> mentioned above.
 	</li>
-	<li>The code is rather unclean, often two or more classes in the same file, wild
-	naming convention(often taken from the european law, which has quite large
-	names).  Try not to get confused by that.</li>
-	<li>The code contains some <a href="http://www.stack.nl/~dimitri/doxygen/index.html">doxygen</a>-style comments. You can access the generated code documentation <a href="http://readesm.sourceforge.net/codedoc">here</a>.</li>
+	<li>The code is rather unclean, often two or more classes in the same file, wild naming convention (often taken from the European law, which has quite large names). Try not to get confused by that.</li>
+	<li>The code contains some <a href="https://www.doxygen.nl/index.html">doxygen</a>-style comments. You can access the generated code documentation <a href="https://readesm.sourceforge.net/codedoc/">here</a>.</li>
 </ul>
 
-
-<h2><a name="ressources"></a>Ressources</h2>
-<p>These links might help you use Readesm better:</p>
+<h2 id="resources">Resources</h2>
+<p>These links might help you use ReadESM better:</p>
 <ul>
-	<li>There is of course the <a href="http://readesm.sourceforge.net">Sourceforge project page</a>.</li>
-	<li>Also you might find some information in the <a href="http://andreas.goelzer.de/readesm-2011-with-qt-user-interface">readesm 2011</a> post on my personal homepage, or in this <a href="http://andreas.goelzer.de/readesm-reading-digital-tachograph-files">original readesm post</a> and the comments to it.</li>
-	<li><a href="http://developer.berlios.de/projects/fahrlinx/">Fahrlinux</a> is a project aimed at reading out driver cards with Card readers in Linux.</li>
-	<li>The Actros Weblog has a <a href="http://blog.actrophp.de/2010/07/fahrerkarte-auslesen-und-auswerten-unter-linux/">post</a> on how to read out the driver card with <a href="http://developer.berlios.de/projects/fahrlinx/">Fahrlinux</a> and Readesm.</li>
+	<li>There is of course the <a href="https://readesm.sourceforge.net/">SourceForge project page</a>.</li>
+	<li>Also you might find some information in the <a href="http://andreas.goelzer.de/readesm-2011-with-qt-user-interface">ReadESM 2011</a> post on my personal homepage, or in this <a href="http://andreas.goelzer.de/readesm-reading-digital-tachograph-files">original ReadESM post</a> and the comments to it.</li>
+	<li><a href="https://sourceforge.net/projects/fahrlinx.berlios/">Fahrlinux</a> is a project aimed at reading out driver cards with card readers on Linux.</li>
+	<li>The Actros Weblog has a <a href="https://blog.actrophp.de/fahrerkarte-auslesen-und-auswerten-unter-linux/">post</a> on how to read out the driver card with <a href="https://sourceforge.net/projects/fahrlinx.berlios/">Fahrlinux</a> and ReadESM.</li>
 </ul>
-<p>You can also try <a href="http://www.opendtacho.org/">open dtacho</a>, an open source project trying to create a complete management suite for tachograph data.  The <a href="http://dtc.jrc.it/helpdesk_faq.php">ERCA website FAQ</a> might also answer some questions regarding digital tachographs.</p>
+<p>The <a href="https://dtc.jrc.ec.europa.eu/dtc_help_desk.php.html">ERCA website FAQ</a> might also answer some questions regarding digital tachographs.</p>
 
-<h2><a name="help"></a>Getting further help</h2>
+<h2 id="help">Getting further help</h2>
 <p>If the program crashes, won't install, if you have feature requests or general feedback, feel free to either:</p>
 <ul>
 	<li>Send me an email to <a href="mailto:K_2005@goelzer.de">K_2005@goelzer.de</a></li>
-	<li>Open a post in the <a href="http://sourceforge.net/forum/?group_id=252982">forum</a>.</li>
-	<li>For specific bugs, file a report in the <a href="http://sourceforge.net/tracker/?group_id=252982&amp;atid=1126660">tracker</a>.</li>
+	<li>Open a post in the <a href="https://sourceforge.net/p/readesm/discussion/">forum</a>.</li>
+	<li>For specific bugs, file a report in the <a href="https://sourceforge.net/p/readesm/bugs/">tracker</a>.</li>
 	<li>Write a comment to the entry on my <a href="http://andreas.goelzer.de/readesm-reading-digital-tachograph-files">personal homepage</a>.</li>
 </ul>
 
-<h2><a name="acknowledgements"></a>Acknowledgements</h2>
+<h2 id="acknowledgments">Acknowledgments</h2>
 <ul>
 <li>Martin Walch provided the German translation.</li>
 <li>Jose Huguet provided the Spanish translation.</li>

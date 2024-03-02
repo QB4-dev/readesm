@@ -10,43 +10,47 @@ class Subblocks : public DataType {
 protected:
 	std::vector<T> array;
 	int numberOfBytes;
-	void appendAndIncrement(DataPointer& walker, T toAppend){
-		if(!toAppend.isDefaultValue()) array.push_back(toAppend);
+	void appendAndIncrement(DataPointer& walker, T toAppend) {
+		if (!toAppend.isDefaultValue()) {
+			array.push_back(toAppend);
+		}
 		walker += toAppend.size();
 	}
-	Subblocks(const DataPointer& start)  : DataType(start), numberOfBytes(0) {}
+	explicit Subblocks(const DataPointer& start) : DataType(start), numberOfBytes(0) {}
 public:
-	const T& operator[](int j) const{
+	const T& operator[](int j) const {
 		return array[j];
 	}
-	T& operator[](int j){
+	T& operator[](int j) {
 		return array[j];
 	}
-	int numberOfBlocks() const{
+	int numberOfBlocks() const {
 		return array.size();
 	}
-	void printOn(Reporter& o) const{
+	void printOn(Reporter& o) const {
 		o.writeArray(*this, title());
 	}
-	QString className()const{
+	QString className()const {
 		return "Subblocks";
 	}
 	int size() const {
 		return numberOfBytes;
 	}
 	///Create a fixed number of subblocks
-	static Subblocks fromTypeAndCount(const DataPointer& start, int count){
+	static Subblocks fromTypeAndCount(const DataPointer& start, int count) {
 		DataPointer walker(start);
 		Subblocks rv(start);
-		for(int j = 0; j < count; ++j) rv.appendAndIncrement(walker, T(walker));
+		for (int j = 0; j < count; ++j) {
+			rv.appendAndIncrement(walker, T(walker));
+		}
 		rv.numberOfBytes = walker - start;
 		return rv;
 	}
 	///Create Subblocks if a fixed number of bytes is to be read
-	static Subblocks fromTypeAndLength(const DataPointer& start, int length){
+	static Subblocks fromTypeAndLength(const DataPointer& start, int length) {
 		DataPointer walker(start);
 		Subblocks rv(start);
-		while(walker - start < length){
+		while (walker - start < length) {
 			//qDebug() << "pos " << (walker - start) << " of " << length;
 			rv.appendAndIncrement(walker, T(walker));
 		}

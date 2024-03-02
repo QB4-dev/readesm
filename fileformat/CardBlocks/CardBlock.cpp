@@ -1,11 +1,14 @@
 #include "CardBlock.h"
 
+#include "../readTypes.h"
+#include "../DataTypes/RawData.h"
+
 CardBlock::CardBlock(const DataPointer& filewalker) :
 	TopLevelBlock(filewalker),
 	datasize(readBigEndianInt2(start + 3))
 {
 	DataPointer signature = start + 5 + datasize;
-	if(signature.bytesLeft() >= 5 + 128 && readBigEndianInt2(signature) == readBigEndianInt2(start) && signature[2] == 1) {
+	if (signature.bytesLeft() >= 5 + 128 && readBigEndianInt2(signature) == readBigEndianInt2(start) && signature[2] == 1) {
 		hasSignature = true;
 	}
 }

@@ -2,13 +2,13 @@
 
 [Setup]
 AppCopyright=Andreas Gölzer
-AppName=Readesm
-AppVersion=2011.12
+AppName=ReadESM
+AppVersion=2018.1
 ChangesAssociations=true
-DefaultDirName=readesm
-DefaultGroupName=Readesm
-SetupIconFile=ressources\icons\readesm.ico
-WizardImageFile=ressources\windows-integration\installer.bmp
+DefaultDirName=ReadESM
+DefaultGroupName=ReadESM
+SetupIconFile=resources\icons\readesm.ico
+WizardImageFile=resources\windows-integration\installer.bmp
 AppID=readesm_isl
 OutputBaseFilename=readesm-setup
 LicenseFile=COPYING
@@ -20,15 +20,15 @@ AppPublisherURL=http://andreas.goelzer.de/
 [Files]
 Source: "build/readesm.exe"; DestDir: "{app}\bin";
 Source: "build/*.qm"; DestDir: "{app}\translations";
-Source: "ressources\windows-integration\readesm.url"; DestDir: "{app}\doc";
+Source: "resources\windows-integration\readesm.url"; DestDir: "{app}\doc";
 Source: "homepage\help.html"; DestDir: "{app}\doc";
 Source: "homepage\style.css"; DestDir: "{app}\doc";
 Source: "dlls/*.dll"; DestDir: "{app}\bin";
 
 [Icons]
-Name: "{group}\Readesm"; Filename: {#EXE}; WorkingDir: "{app}"
-Name: "{group}\Readesm Project Page"; Filename: "{app}\doc\readesm.url"
-Name: "{userdesktop}\Readesm"; Filename: {#EXE}; WorkingDir: "{app}"
+Name: "{group}\ReadESM"; Filename: {#EXE}; WorkingDir: "{app}"
+Name: "{group}\ReadESM Project Page"; Filename: "{app}\doc\readesm.url"
+Name: "{userdesktop}\ReadESM"; Filename: {#EXE}; WorkingDir: "{app}"
 
 [Registry]
 Root: HKCR; Subkey: ".ddd"; ValueType: string; ValueName: ""; ValueData: "x-esm.File"; Flags: uninsdeletevalue
@@ -47,7 +47,7 @@ Name: "ru"; MessagesFile: "compiler:languages\Russian.isl"
 Name: "es"; MessagesFile: "compiler:languages\Spanish.isl"
 
 [CustomMessages]
-HomePageLink=readesm.sf.net
+HomePageLink=readesm.sourceforge.net
 
 [Code]
 const Url = 'http://readesm.sourceforge.net/';

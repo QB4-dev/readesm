@@ -5,8 +5,11 @@
 
 KeyIdentifier::KeyIdentifier(const DataPointer& filewalker) : DataType(filewalker)
 {
-	if(start[7] == 1) content = QSharedPointer<DataType>(new CertificateAuthority(start));
-	else content = QSharedPointer<DataType>(new RawKeyIdentifier(start));
+	if (start[7] == 1) {
+		content = QSharedPointer<DataType>(new CertificateAuthority(start));
+	} else {
+		content = QSharedPointer<DataType>(new RawKeyIdentifier(start));
+	}
 }
 
 int KeyIdentifier::size() const {
@@ -18,5 +21,7 @@ QString KeyIdentifier::className() const {
 }
 
 void KeyIdentifier::printOn(Reporter& o) const {
-	if(content) content->printOn(o);
+	if (content) {
+		content->printOn(o);
+	}
 }
