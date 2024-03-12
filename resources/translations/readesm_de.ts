@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.1" language="de">
 <context>
@@ -2617,7 +2617,7 @@
 <context>
     <name>mainWindow</name>
     <message>
-        <location filename="../../gui/mainWindow.cpp" line="+34"/>
+        <location filename="../../gui/mainWindow.cpp" line="+35"/>
         <source>&amp;File</source>
         <translation>&amp;Datei</translation>
     </message>
@@ -2672,7 +2672,7 @@
         <translation>Über &amp;Qt</translation>
     </message>
     <message>
-        <location line="+17"/>
+        <location line="+20"/>
         <source>About ReadESM</source>
         <translation>Über ReadESM</translation>
     </message>
@@ -2705,26 +2705,26 @@ Die Veröffentlichung dieses Programms erfolgt in der Hoffnung, daß es Ihnen vo
 Sie sollten ein Exemplar der GNU General Public License zusammen mit diesem Programm erhalten haben. Falls nicht, siehe &lt;http://www.gnu.org/licenses/&gt;.</translation>
     </message>
     <message>
-        <location line="+18"/>
+        <location line="+17"/>
         <source>Open Tachograph File</source>
         <translation>Tachographendatei öffnen</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location line="+62"/>
+        <location line="+64"/>
         <source>Tachograph Files</source>
         <oldsource>Tachograph Files (*.esm *.ddd)</oldsource>
         <translation>Tachographendateien</translation>
     </message>
     <message>
-        <location line="-62"/>
-        <location line="+42"/>
+        <location line="-64"/>
+        <location line="+44"/>
         <location line="+20"/>
         <source>All files</source>
         <translation>Alle Dateien</translation>
     </message>
     <message>
-        <location line="-51"/>
+        <location line="-53"/>
         <source>Could not read file</source>
         <translation>Konnte Datei nicht lesen</translation>
     </message>
@@ -2734,7 +2734,7 @@ Sie sollten ein Exemplar der GNU General Public License zusammen mit diesem Prog
         <translation>Dokument drucken</translation>
     </message>
     <message>
-        <location line="+9"/>
+        <location line="+11"/>
         <location line="+11"/>
         <location line="+9"/>
         <location line="+11"/>

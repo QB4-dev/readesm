@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.1" language="hu_HU">
 <context>
@@ -3133,7 +3133,7 @@
 <context>
     <name>mainWindow</name>
     <message>
-        <location filename="../../gui/mainWindow.cpp" line="+34"/>
+        <location filename="../../gui/mainWindow.cpp" line="+35"/>
         <source>&amp;File</source>
         <translation>&amp;Fájl</translation>
     </message>
@@ -3188,7 +3188,7 @@
         <translation>&amp;Qt-ről</translation>
     </message>
     <message>
-        <location line="+17"/>
+        <location line="+20"/>
         <source>About ReadESM</source>
         <translation>A Readsm-ről</translation>
     </message>
@@ -3227,26 +3227,26 @@ Kapnia kellett egy példányt a GNU General Public License-ből a ReadESMmel egy
 Nem hivatalos magyar fordítás: &lt;http://www.gnu.hu/gplv3.html&gt;.</translation>
     </message>
     <message>
-        <location line="+18"/>
+        <location line="+17"/>
         <source>Open Tachograph File</source>
         <translation>Tachográf fájl megnyitása</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location line="+62"/>
+        <location line="+64"/>
         <source>Tachograph Files</source>
         <oldsource>Tachograph Files (*.esm *.ddd)</oldsource>
         <translation>Tachográf fájlok</translation>
     </message>
     <message>
-        <location line="-62"/>
-        <location line="+42"/>
+        <location line="-64"/>
+        <location line="+44"/>
         <location line="+20"/>
         <source>All files</source>
         <translation>Minden fájl</translation>
     </message>
     <message>
-        <location line="-51"/>
+        <location line="-53"/>
         <source>Could not read file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3256,7 +3256,7 @@ Nem hivatalos magyar fordítás: &lt;http://www.gnu.hu/gplv3.html&gt;.</translat
         <translation>Dokumentum nyomtatása</translation>
     </message>
     <message>
-        <location line="+9"/>
+        <location line="+11"/>
         <location line="+11"/>
         <location line="+9"/>
         <location line="+11"/>
