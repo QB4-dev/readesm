@@ -235,10 +235,36 @@
         <translation>dzienna ilość zdarzeń</translation>
     </message>
     <message>
+        <location filename="../../fileformat/CardBlocks/CardDriverActivity.cpp" line="64"/>
+        <source>Driving</source>
+        <translation>Jazda</translation>
+    </message>
+    <message>
+        <location filename="../../fileformat/CardBlocks/CardDriverActivity.cpp" line="64"/>
+        <source>Working</source>
+        <translation>Praca</translation>
+    </message>
+    <message>
+        <location filename="../../fileformat/CardBlocks/CardDriverActivity.cpp" line="64"/>
+        <source>Rest</source>
+        <translation>Odpoczynek</translation>
+    </message>
+    <message>
+        <location filename="../../fileformat/CardBlocks/CardDriverActivity.cpp" line="64"/>
+        <source>Available</source>
+        <translation>Gotowość</translation>
+    </message>
+    <message>
         <location filename="../../fileformat/CardBlocks/CardDriverActivity.cpp" line="67"/>
         <location filename="../../fileformat/CardBlocks/CardDriverActivity.cpp" line="74"/>
         <source>Timesheet for %1</source>
-        <translation>Karta czasu pracy dla %1</translation>
+        <translation>Karta czasu dla %1</translation>
+    </message>
+    <message>
+        <location filename="../../fileformat/CardBlocks/CardDriverActivity.cpp" line="71"/>
+        <location filename="../../fileformat/CardBlocks/CardDriverActivity.cpp" line="83"/>
+        <source>Summary</source>
+        <translation>Podsumowanie</translation>
     </message>
     <message>
         <location filename="../../fileformat/CardBlocks/CardDriverActivity.cpp" line="86"/>
@@ -333,7 +359,7 @@
     <message>
         <location filename="../../fileformat/CardBlocks/CardIccIdentification.cpp" line="34"/>
         <source>clockStop</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../fileformat/CardBlocks/CardIccIdentification.cpp" line="35"/>
@@ -385,7 +411,7 @@
         <location filename="../../fileformat/DataTypes/CardSlots.cpp" line="9"/>
         <location filename="../../fileformat/DataTypes/RawCardSlots.cpp" line="32"/>
         <source>cardNumberDriverSlotBegin</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">numer slotu kierowcy</translation>
     </message>
     <message>
         <location filename="../../fileformat/DataTypes/CardSlots.cpp" line="12"/>
@@ -1129,17 +1155,17 @@
     <message>
         <location filename="../../fileformat/DataTypes/VuCalibrationRecord.cpp" line="50"/>
         <source>workshopName</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">nazwa warsztatu</translation>
     </message>
     <message>
         <location filename="../../fileformat/DataTypes/VuCalibrationRecord.cpp" line="51"/>
         <source>workshopAddress</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">adres warsztatu</translation>
     </message>
     <message>
         <location filename="../../fileformat/DataTypes/VuCalibrationRecord.cpp" line="52"/>
         <source>workshopCardNumber</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">numer karty warsztatu</translation>
     </message>
     <message>
         <location filename="../../fileformat/DataTypes/VuCalibrationRecord.cpp" line="53"/>
@@ -1149,12 +1175,12 @@
     <message>
         <location filename="../../fileformat/DataTypes/VuCalibrationRecord.cpp" line="54"/>
         <source>vehicleIdentificationNumber</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">numer identyfikacyjny  pojazdu</translation>
     </message>
     <message>
         <location filename="../../fileformat/DataTypes/VuCalibrationRecord.cpp" line="55"/>
         <source>vehicleRegistrationIdentification</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">kraj rejestracji pojazdu</translation>
     </message>
     <message>
         <location filename="../../fileformat/DataTypes/VuCalibrationRecord.cpp" line="56"/>
@@ -1194,12 +1220,12 @@
     <message>
         <location filename="../../fileformat/DataTypes/VuCalibrationRecord.cpp" line="63"/>
         <source>oldTimeValue</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">poprzedni czas</translation>
     </message>
     <message>
         <location filename="../../fileformat/DataTypes/VuCalibrationRecord.cpp" line="64"/>
         <source>newTimeValue</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">nowy czas</translation>
     </message>
     <message>
         <location filename="../../fileformat/DataTypes/VuCalibrationRecord.cpp" line="65"/>
@@ -2010,7 +2036,7 @@
         <location filename="../../fileformat/formatStrings.cpp" line="294"/>
         <location filename="../../fileformat/formatStrings.cpp" line="337"/>
         <source>No information available</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../fileformat/formatStrings.cpp" line="137"/>

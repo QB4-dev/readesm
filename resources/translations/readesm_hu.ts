@@ -293,13 +293,39 @@
         <translation>Napi kártya aktivitási adatok</translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="+2"/>
+        <source>Driving</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Working</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
         <location line="+7"/>
         <source>Timesheet for %1</source>
         <translation>Időtábla %1-re (-ra)</translation>
     </message>
     <message>
+        <location line="-3"/>
         <location line="+12"/>
+        <source>Summary</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
         <source>Timesheet</source>
         <translation>Időtábla</translation>
     </message>

@@ -61,14 +61,14 @@ void CardDriverActivity::printOn(Reporter& report) const {
 	report.tagValuePair(tr("newestRecord"), newestRecord);
 	report.writeArray(cardActivityDailyRecords, tr("cardActivityDailyRecords"));
 	if (cardActivityDailyRecords.numberOfBlocks() > 0) {
-		QString tablehead = "<table><tr><th></th><th>Driving</th><th>Working</th><th>Rest</th><th>Available</th></tr>";
+		QString tablehead = "<table><tr><th></th><th>" + tr("Driving") + "</th><th>" + tr("Working") + "</th><th>" + tr("Rest") + "</th><th>" + tr("Available") +"</th></tr>";
 		activityVector durationsMonth;
 		int currentMonth = cardActivityDailyRecords[0].activityRecordDate.date().month();
 		QString table = QString("<ul><li>%1:").arg(tr("Timesheet for %1").arg(QDate::longMonthName(currentMonth))) + tablehead;
 		for (int j = 0; j < cardActivityDailyRecords.numberOfBlocks(); ++j) {
 			if (cardActivityDailyRecords[j].activityRecordDate.date().month() != currentMonth) {
 				currentMonth = cardActivityDailyRecords[j].activityRecordDate.date().month();
-				table += QString("<tr><th>Summary</th><th>%1</th><th>%2</th><th>%3</th><th>%4</th></tr>").arg(ActivityChangeInfo::formatClock(durationsMonth[ActivityChangeInfo::DRIVING]), ActivityChangeInfo::formatClock(durationsMonth[ActivityChangeInfo::WORK]), ActivityChangeInfo::formatClock(durationsMonth[ActivityChangeInfo::REST] + durationsMonth[ActivityChangeInfo::SHORTREST]), ActivityChangeInfo::formatClock(durationsMonth[ActivityChangeInfo::AVAILABLE]));
+				table += "<tr><th>" + tr("Summary") + "</th><th>" + QString("%1</th><th>%2</th><th>%3</th><th>%4</th></tr>").arg(ActivityChangeInfo::formatClock(durationsMonth[ActivityChangeInfo::DRIVING]), ActivityChangeInfo::formatClock(durationsMonth[ActivityChangeInfo::WORK]), ActivityChangeInfo::formatClock(durationsMonth[ActivityChangeInfo::REST] + durationsMonth[ActivityChangeInfo::SHORTREST]), ActivityChangeInfo::formatClock(durationsMonth[ActivityChangeInfo::AVAILABLE]));
 
 				durationsMonth = activityVector();
 				table += QString("</table></li><li>%1:").arg(tr("Timesheet for %1").arg(QDate::longMonthName(currentMonth))) + tablehead;
@@ -80,7 +80,7 @@ void CardDriverActivity::printOn(Reporter& report) const {
 			table += QString("<tr><td>%1</td><td>%2</td><td>%3</td><td>%4</td><td>%5</td></tr>").arg(cardActivityDailyRecords[j].activityRecordDate.toString(), ActivityChangeInfo::formatClock(durations[ActivityChangeInfo::DRIVING]), ActivityChangeInfo::formatClock(durations[ActivityChangeInfo::WORK]), ActivityChangeInfo::formatClock(durations[ActivityChangeInfo::REST] + durations[ActivityChangeInfo::SHORTREST]), ActivityChangeInfo::formatClock(durations[ActivityChangeInfo::AVAILABLE]));
 			durationsMonth += durations;
 		}
-		table += QString("<tr><th>Summary</th><th>%1</th><th>%2</th><th>%3</th><th>%4</th></tr>").arg(ActivityChangeInfo::formatClock(durationsMonth[ActivityChangeInfo::DRIVING]), ActivityChangeInfo::formatClock(durationsMonth[ActivityChangeInfo::WORK]), ActivityChangeInfo::formatClock(durationsMonth[ActivityChangeInfo::REST] + durationsMonth[ActivityChangeInfo::SHORTREST]), ActivityChangeInfo::formatClock(durationsMonth[ActivityChangeInfo::AVAILABLE]));
+		table += "<tr><th>" + tr("Summary") + "</th><th>" + QString("%1</th><th>%2</th><th>%3</th><th>%4</th></tr>").arg(ActivityChangeInfo::formatClock(durationsMonth[ActivityChangeInfo::DRIVING]), ActivityChangeInfo::formatClock(durationsMonth[ActivityChangeInfo::WORK]), ActivityChangeInfo::formatClock(durationsMonth[ActivityChangeInfo::REST] + durationsMonth[ActivityChangeInfo::SHORTREST]), ActivityChangeInfo::formatClock(durationsMonth[ActivityChangeInfo::AVAILABLE]));
 
 		table += "</table></li></ul>";
 		report.tagValuePair(tr("Timesheet"), table);

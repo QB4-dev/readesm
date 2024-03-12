@@ -208,6 +208,26 @@
         <source>oldestRecord</source>
         <translation>Старые записи</translation>
     </message>
+    <message>
+        <source>Driving</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Working</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Summary</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CardDrivingLicenseInformation</name>
